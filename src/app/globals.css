@@ -1,40 +1,11 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-instrument-serif);
   --font-display: var(--font-space-grotesk);
-
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-marquee: marquee 45s linear infinite;
-  --animate-marquee-reverse: marquee 45s linear infinite reverse;
-  --animate-orbit: spin var(--orbit-duration, 60s) linear infinite;
-  --animate-counter-orbit: spin var(--orbit-duration, 60s) linear infinite reverse;
-
-  @keyframes float {
-    0%,
-    100% {
-      translate: 0 0;
-    }
-    50% {
-      translate: 0 -8px;
-    }
-  }
-
-  @keyframes marquee {
-    to {
-      transform: translateX(-50%);
-    }
-  }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
-}
-
-html {
-  scroll-behavior: smooth;
 }

@@ -1,35 +1,27 @@
-// PROTOTYPE: Platzhalterinhalte bis zur Storyblok-Anbindung. Werte in [eckigen Klammern] sind unbekannt.
+// Platzhalterinhalte bis zur Storyblok-Anbindung, in beiden Sprachen. Werte in [eckigen Klammern] sind unbekannt.
 import type { Localized } from "@/i18n";
+import type { SocialLink, Technology } from "./types";
 
-export type Technology = {
-  key: string;
-  name: string;
-  logo?: string;
-  isSkill: boolean;
-  /** PROTOTYPE: Gewichtung 1–3 für die Größe in der Skill-Wolke – noch keine bestätigte Domänenidee. */
-  weight: 1 | 2 | 3;
-};
-
-export type Project = {
+type Project = {
   name: string;
   description: Localized;
   image: string;
+  /** Schlüssel aus `technologies`. */
   technologies: string[];
   link?: string;
   githubLink?: string;
 };
 
-export type Station = {
+type Station = {
   kind: "job" | "education";
   role: Localized;
   organisation: string;
   from: string;
   to?: string;
   description: Localized;
+  /** Schlüssel aus `technologies`. */
   technologies: string[];
 };
-
-export type SocialLink = { label: string; href: string };
 
 const icon = (slug: string) => `/placeholder/icons/${slug}.svg`;
 
@@ -53,19 +45,13 @@ export const technologies: Technology[] = [
   { key: "css", name: "CSS", logo: icon("css"), isSkill: true, weight: 1 },
   { key: "laravel", name: "Laravel", logo: icon("laravel"), isSkill: true, weight: 1 },
   { key: "mysql", name: "MySQL", logo: icon("mysql"), isSkill: true, weight: 1 },
-  { key: "unity", name: "Unity", logo: icon("unity"), isSkill: false, weight: 1 },
-  { key: "stenciljs", name: "Stencil.js", logo: icon("stencil"), isSkill: false, weight: 1 },
-  { key: "bootstrap", name: "Bootstrap", logo: icon("bootstrap"), isSkill: false, weight: 1 },
-  { key: "websocket", name: "WebSocket", isSkill: false, weight: 1 },
+  { key: "unity", name: "Unity", logo: icon("unity"), isSkill: false },
+  { key: "stenciljs", name: "Stencil.js", logo: icon("stencil"), isSkill: false },
+  { key: "bootstrap", name: "Bootstrap", logo: icon("bootstrap"), isSkill: false },
+  { key: "websocket", name: "WebSocket", isSkill: false },
 ];
 
-export const technologyByKey = (key: string) =>
-  technologies.find((technology) => technology.key === key)!;
-
-export const skills = technologies.filter((technology) => technology.isSkill);
-
 export const about = {
-  name: "Benni Holderle",
   role: { de: "Software-Entwickler", en: "Software Developer" },
   greeting: { de: "Hi! Ich bin Benni.", en: "Hi! I'm Benni." },
   intro: {
@@ -76,7 +62,7 @@ export const about = {
     de: "[Über-mich-Text] Angefangen hat alles im Studium Onlinemedien. Heute arbeite ich fest angestellt als Software-Entwickler und experimentiere nebenbei mit neuen Technologien wie Bun und WebSockets.",
     en: "[About text] It all started while studying Online Media. Today I work full-time as a software developer and experiment with new technologies like Bun and WebSockets on the side.",
   },
-} satisfies Record<string, Localized | string>;
+} satisfies Record<string, Localized>;
 
 export const socialLinks: SocialLink[] = [
   { label: "GitHub", href: "https://github.com/benniho03" },
@@ -191,10 +177,8 @@ export const projects: Project[] = [
 export const labels = {
   projects: { de: "Projekte", en: "Projects" },
   about: { de: "Über mich", en: "About" },
-  skills: { de: "Skills", en: "Skills" },
   career: { de: "Werdegang", en: "Career" },
   visit: { de: "Ansehen", en: "View" },
-  code: { de: "Code", en: "Code" },
   today: { de: "heute", en: "present" },
   imprint: { de: "Impressum", en: "Legal notice" },
   privacy: { de: "Datenschutz", en: "Privacy" },

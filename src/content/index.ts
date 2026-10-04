@@ -12,8 +12,9 @@ import type {
 } from "./types";
 
 function technology(key: string): Technology {
-  const { name, logo, isSkill, weight } = placeholder.technologyByKey(key);
-  return isSkill ? { key, name, logo, isSkill, weight } : { key, name, logo, isSkill };
+  const match = placeholder.technologies.find((technology) => technology.key === key);
+  if (!match) throw new Error(`Unbekannte Technologie: ${key}`);
+  return match;
 }
 
 export async function getSettings(lang: Locale): Promise<Settings> {
@@ -43,9 +44,7 @@ export async function getHomepage(lang: Locale): Promise<{
 }> {
   return {
     about: { bio: placeholder.about.bio[lang] },
-    skills: placeholder.technologies
-      .map(({ key }) => technology(key))
-      .filter((item): item is Skill => item.isSkill),
+    skills: placeholder.technologies.filter((item): item is Skill => item.isSkill),
     stations: placeholder.stations.map((station) => ({
       ...station,
       role: station.role[lang],

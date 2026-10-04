@@ -43,7 +43,7 @@ Fertig, wenn ein Commit mit Lint-, Typ- oder Testfehlern blockiert wird.
 - [x] E-Mail-Pille (mailto) neben GitHub und LinkedIn.
 - [x] Routen für Impressum und Datenschutz mit Platzhaltertext, im Footer verlinkt.
 - [x] Domänentypen an das Glossar angleichen (z. B. `weight` als Gewichtung).
-- [ ] In einem eigenen Commit entfernen: `_prototype/`, `PrototypeSwitcher`, die Fonts Geist, Geist Mono und Instrument Serif.
+- [x] In einem eigenen Commit entfernen: `_prototype/`, `PrototypeSwitcher`, die Fonts Geist, Geist Mono und Instrument Serif.
 - [ ] Fonts lokal einbinden für DSGVO
 
 Fertig, wenn `/de` und `/en` Variante C ohne Prototyp-Code zeigen.

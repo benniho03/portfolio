@@ -2,23 +2,13 @@
 
 Festgelegt nach drei Prototyp-Runden: **Variante C „Split“ aus Runde 3**. Diese Datei ist die Vorgabe für den Produktionscode. Begriffe wie Startseite, Projekt, Skill, Werdegang und Station stehen in [`GLOSSARY.md`](../GLOSSARY.md).
 
-Der Prototyp ist die Referenz für alle Details, die hier fehlen. Er läuft unter `/de?variant=C`, bis der Prototyp-Code entfernt wird:
-
-| Datei unter `src/app/[lang]/_prototype/` | Inhalt                                                             |
-| ---------------------------------------- | ------------------------------------------------------------------ |
-| `variant-c.tsx`                          | Aufbau der Startseite                                              |
-| `oval.tsx`                               | Seitenrahmen, Porträt, Abschnitte, `ringsByWeight`                 |
-| `orbit.tsx`                              | `OvalOrbit` (Client-Komponente)                                    |
-| `bento.tsx`                              | `ProjectTiles`, `SkillLogo` (der Rest der Datei gehört zu Runde 2) |
-| `shared.tsx`                             | `LanguageSwitch`, `t()`                                            |
-
-Die Runden 1 und 2 liegen in `runde-1/` und `runde-2/` und sind verworfen.
+Umgesetzt ist das Design in `src/components/`. Der Prototyp aller drei Runden liegt nur noch in der Git-History (Commit „Prototyp der Startseite und Planungsdokumente“).
 
 ## Grundstil
 
 - Hell, ruhig, viel Weißraum. Hintergrund `stone-100`, Text `stone-900`, Nebentext `stone-500`/`stone-600`, Linien `stone-300`.
 - Akzent: Verlauf `pink-600 → amber-400` (Porträt-Platzhalter), `amber-300` als Hover-Farbe in den Projektkacheln.
-- Schrift: Space Grotesk (`font-display`) für alles. Die übrigen Fonts im Layout (Geist, Geist Mono, Instrument Serif) stammen aus Runde 1 und können weg.
+- Schrift: Space Grotesk (`font-display`) für alles.
 - Inhaltsbreite `max-w-6xl` mit `px-4`.
 - Nur die Projekte sind Bento-Kacheln, alle anderen Abschnitte sind offen, ohne Kacheln.
 
