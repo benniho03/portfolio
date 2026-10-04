@@ -1,15 +1,16 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import type { Skill } from "@/content/types";
 import type { Ring } from "./orbit-rings";
-import { TechnologyLogo } from "./technology-logo";
 
 const startAngle = (ringIndex: number, itemIndex: number, count: number) =>
   ((2 * Math.PI) / count) * itemIndex + ringIndex * 0.9;
 
+// Gerundet, weil Math.cos/sin je nach JS-Engine in den letzten Stellen abweichen und die Hydration sonst scheitert.
 const position = (ring: Ring, angle: number) => ({
-  left: `${50 + ring.rx * Math.cos(angle)}%`,
-  top: `${50 + ring.ry * Math.sin(angle)}%`,
+  left: `${(50 + ring.rx * Math.cos(angle)).toFixed(3)}%`,
+  top: `${(50 + ring.ry * Math.sin(angle)).toFixed(3)}%`,
 });
 
 /** Skill-Logos kreisen auf ovalen Bahnen um `children`. Die Startpositionen kommen schon vom Server. */
@@ -84,14 +85,13 @@ export function SkillOrbit({
           >
             <div
               tabIndex={0}
+              role="img"
+              aria-label={skill.name}
               className="group relative block rounded-2xl bg-white p-2 shadow-md ring-1 ring-black/5 outline-stone-900"
               {...hold}
             >
-              <TechnologyLogo technology={skill} className={ring.logo} />
-              <span
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 top-full z-30 mt-1 -translate-x-1/2 whitespace-nowrap rounded-full bg-stone-900 px-2 py-0.5 text-xs text-white opacity-0 transition group-hover:opacity-100 group-focus-visible:opacity-100"
-              >
+              <SkillLogo skill={skill} className={ring.logo} />
+              <span className="pointer-events-none absolute left-1/2 top-full z-30 mt-1 -translate-x-1/2 whitespace-nowrap rounded-full bg-stone-900 px-2 py-0.5 text-xs text-white opacity-0 transition group-hover:opacity-100 group-focus-visible:opacity-100">
                 {skill.name}
               </span>
             </div>
@@ -99,5 +99,20 @@ export function SkillOrbit({
         )),
       )}
     </div>
+  );
+}
+
+/** Ohne Logo ein dunkles Kürzel. Dekorativ, den Namen trägt die umgebende Badge. */
+function SkillLogo({ skill, className }: { skill: Skill; className: string }) {
+  return skill.logo ? (
+    // eslint-disable-next-line @next/next/no-img-element -- SVG-Logos brauchen keine Bildoptimierung
+    <img src={skill.logo} alt="" className={`object-contain ${className}`} />
+  ) : (
+    <span
+      aria-hidden
+      className={`grid place-items-center rounded-xl bg-stone-900 text-[0.6em] font-bold text-white ${className}`}
+    >
+      {skill.name.slice(0, 2)}
+    </span>
   );
 }

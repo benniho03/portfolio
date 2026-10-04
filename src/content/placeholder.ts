@@ -13,7 +13,7 @@ type Project = {
 };
 
 type Station = {
-  kind: "job" | "education";
+  kind: "employment" | "education";
   role: Localized;
   organisation: string;
   from: string;
@@ -72,7 +72,7 @@ export const socialLinks: SocialLink[] = [
 
 export const stations: Station[] = [
   {
-    kind: "job",
+    kind: "employment",
     role: { de: "Software-Entwickler", en: "Software Developer" },
     organisation: "[Arbeitgeber]",
     from: "[2024]",
@@ -184,7 +184,7 @@ export const labels = {
   privacy: { de: "Datenschutz", en: "Privacy" },
 } satisfies Record<string, Localized>;
 
-export const legalPages = {
+export const rechtlicheSeiten = {
   impressum: {
     title: { de: "Impressum", en: "Legal notice" },
     paragraphs: [

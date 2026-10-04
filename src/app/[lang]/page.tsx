@@ -3,7 +3,7 @@ import { AboutSection } from "@/components/about-section";
 import { CareerSection } from "@/components/career-section";
 import { Hero } from "@/components/hero";
 import { ProjectsSection } from "@/components/projects-section";
-import { getHomepage, getSettings } from "@/content";
+import { getStartseite, getSettings } from "@/content";
 import { hasLocale } from "@/i18n";
 
 export default async function Startseite({ params }: PageProps<"/[lang]">) {
@@ -11,7 +11,7 @@ export default async function Startseite({ params }: PageProps<"/[lang]">) {
   if (!hasLocale(lang)) notFound();
   const [settings, { about, skills, stations, projects }] = await Promise.all([
     getSettings(lang),
-    getHomepage(lang),
+    getStartseite(lang),
   ]);
   const { labels } = settings;
 

@@ -2,8 +2,8 @@ import type { Locale } from "@/i18n";
 import * as placeholder from "./placeholder";
 import type {
   About,
-  LegalPage,
-  LegalPageKind,
+  RechtlicheSeite,
+  RechtlicheSeiteArt,
   Project,
   Settings,
   Skill,
@@ -11,7 +11,7 @@ import type {
   Technology,
 } from "./types";
 
-function technology(key: string): Technology {
+function technologyByKey(key: string): Technology {
   const match = placeholder.technologies.find((technology) => technology.key === key);
   if (!match) throw new Error(`Unbekannte Technologie: ${key}`);
   return match;
@@ -36,7 +36,7 @@ export async function getSettings(lang: Locale): Promise<Settings> {
   };
 }
 
-export async function getHomepage(lang: Locale): Promise<{
+export async function getStartseite(lang: Locale): Promise<{
   about: About;
   skills: Skill[];
   stations: Station[];
@@ -49,17 +49,20 @@ export async function getHomepage(lang: Locale): Promise<{
       ...station,
       role: station.role[lang],
       description: station.description[lang],
-      technologies: station.technologies.map(technology),
+      technologies: station.technologies.map(technologyByKey),
     })),
     projects: placeholder.projects.map((project) => ({
       ...project,
       description: project.description[lang],
-      technologies: project.technologies.map(technology),
+      technologies: project.technologies.map(technologyByKey),
     })),
   };
 }
 
-export async function getLegalPage(lang: Locale, kind: LegalPageKind): Promise<LegalPage> {
-  const { title, paragraphs } = placeholder.legalPages[kind];
+export async function getRechtlicheSeite(
+  lang: Locale,
+  kind: RechtlicheSeiteArt,
+): Promise<RechtlicheSeite> {
+  const { title, paragraphs } = placeholder.rechtlicheSeiten[kind];
   return { title: title[lang], paragraphs: paragraphs.map((paragraph) => paragraph[lang]) };
 }

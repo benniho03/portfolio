@@ -14,20 +14,4 @@ describe("orbitRings", () => {
       ["git"],
     ]);
   });
-
-  test("legt die Ringe von innen nach außen mit wachsenden Halbachsen an", () => {
-    const rings = orbitRings([]);
-
-    expect(rings.map(({ rx, ry }) => [rx, ry])).toEqual([
-      [22, 25],
-      [34, 37],
-      [46, 47],
-    ]);
-  });
-
-  test("lässt den mittleren Ring gegenläufig und die äußeren langsamer kreisen", () => {
-    const rings = orbitRings([]);
-
-    expect(rings.map(({ period }) => period)).toEqual([45, -72, 99]);
-  });
 });

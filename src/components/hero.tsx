@@ -1,14 +1,13 @@
 import type { Settings, Skill } from "@/content/types";
 import { orbitRings } from "./orbit-rings";
+import { sectionLabel } from "./section";
 import { SkillOrbit } from "./skill-orbit";
 
 export function Hero({ settings, skills }: { settings: Settings; skills: Skill[] }) {
   return (
     <section className="grid items-center gap-8 md:min-h-[75vh] md:grid-cols-[1fr_1.15fr]">
       <div>
-        <p className="text-sm font-medium uppercase tracking-widest text-stone-500">
-          {settings.role}
-        </p>
+        <p className={sectionLabel}>{settings.role}</p>
         <h1 className="mt-3 text-5xl font-bold leading-none md:text-7xl">{settings.greeting}</h1>
         <p className="mt-6 max-w-xl text-lg text-stone-600">{settings.intro}</p>
         <div className="mt-8 flex flex-wrap items-center gap-3">

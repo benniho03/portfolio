@@ -1,10 +1,16 @@
 import Image from "next/image";
 import type { Labels, Project } from "@/content/types";
 
-/** Das erste Projekt ist groß, danach wechseln breite und kleine Kacheln. */
-const tileSpans = ["md:col-span-2 md:row-span-2", "md:col-span-2", "", ""];
-const tileSpan = (index: number) =>
-  index === 0 ? tileSpans[0] : tileSpans[1 + ((index - 1) % (tileSpans.length - 1))];
+const tiles = {
+  large: { span: "md:col-span-2 md:row-span-2", sizes: "(min-width: 768px) 50vw, 100vw" },
+  wide: { span: "md:col-span-2", sizes: "(min-width: 768px) 50vw, 100vw" },
+  small: { span: "", sizes: "(min-width: 768px) 25vw, 100vw" },
+};
+type Tile = (typeof tiles)[keyof typeof tiles];
+
+/** Das erste Projekt ist groß, danach wechseln eine breite und zwei kleine Kacheln. */
+const tileAt = (index: number): Tile =>
+  index === 0 ? tiles.large : [tiles.wide, tiles.small, tiles.small][(index - 1) % 3];
 
 export function ProjectsSection({ projects, labels }: { projects: Project[]; labels: Labels }) {
   return (
@@ -18,8 +24,7 @@ export function ProjectsSection({ projects, labels }: { projects: Project[]; lab
             key={project.name}
             project={project}
             visitLabel={labels.visit}
-            large={i === 0}
-            className={tileSpan(i)}
+            tile={tileAt(i)}
           />
         ))}
       </div>
@@ -30,23 +35,21 @@ export function ProjectsSection({ projects, labels }: { projects: Project[]; lab
 function ProjectTile({
   project,
   visitLabel,
-  large,
-  className,
+  tile,
 }: {
   project: Project;
   visitLabel: string;
-  large: boolean;
-  className: string;
+  tile: Tile;
 }) {
   return (
     <article
-      className={`group relative min-h-64 overflow-hidden rounded-3xl bg-stone-900 ${className}`}
+      className={`group relative min-h-64 overflow-hidden rounded-3xl bg-stone-900 ${tile.span}`}
     >
       <Image
         src={project.image}
         alt=""
         fill
-        sizes={large ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 768px) 25vw, 100vw"}
+        sizes={tile.sizes}
         className="object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-40"
       />
       <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/30 to-transparent p-6 text-white">

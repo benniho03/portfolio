@@ -1,6 +1,6 @@
-// Domänentypen der Website, Begriffe wie in GLOSSARY.md. Texte liegen bereits in der angefragten Sprache vor.
+// Alle Texte liegen bereits in der angefragten Sprache vor.
 
-/** Wie stark Benni einen Skill hervorheben will: 1 (wenig) bis 3 (stark). Sagt nichts darüber aus, wie gut er ihn beherrscht. */
+/** 1 (wenig) bis 3 (stark) hervorgehoben. Sagt nichts darüber aus, wie gut Benni den Skill beherrscht. */
 export type Weight = 1 | 2 | 3;
 
 export type Technology = {
@@ -9,7 +9,6 @@ export type Technology = {
   logo?: string;
 } & ({ isSkill: false } | { isSkill: true; weight: Weight });
 
-/** Eine Technologie, die Benni als eigene Kompetenz hervorhebt. */
 export type Skill = Extract<Technology, { isSkill: true }>;
 
 export type Project = {
@@ -23,7 +22,7 @@ export type Project = {
 
 /** Ein Abschnitt im Werdegang. Ohne `to` dauert die Station bis heute an. */
 export type Station = {
-  kind: "job" | "education";
+  kind: "employment" | "education";
   role: string;
   organisation: string;
   from: string;
@@ -50,7 +49,7 @@ export type Settings = {
 
 export type About = { bio: string };
 
-export type LegalPageKind = "impressum" | "datenschutz";
+export type RechtlicheSeiteArt = "impressum" | "datenschutz";
 
 /** Impressum oder Datenschutzerklärung, als schlichter Fließtext in Absätzen. */
-export type LegalPage = { title: string; paragraphs: string[] };
+export type RechtlicheSeite = { title: string; paragraphs: string[] };
