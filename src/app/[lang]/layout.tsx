@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -7,7 +7,11 @@ import { getSettings } from "@/content";
 import { hasLocale, locales } from "@/i18n";
 import "../globals.css";
 
-const spaceGrotesk = Space_Grotesk({ variable: "--font-space-grotesk", subsets: ["latin"] });
+const spaceGrotesk = localFont({
+  src: "../fonts/space-grotesk-latin.woff2",
+  weight: "300 700",
+  variable: "--font-space-grotesk",
+});
 
 export const metadata: Metadata = {
   title: "Benni Holderle",
