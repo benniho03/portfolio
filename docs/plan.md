@@ -63,6 +63,7 @@ Fertig, wenn jeder Push eine Preview-URL erzeugt.
 - [ ] Webhook beim Veröffentlichen löst die Revalidierung aus.
 - [ ] Draft Mode und Visual Editor mit Live-Preview.
 - [ ] `src/content/placeholder.ts` und `public/placeholder/` entfernen.
+- [ ] Matcher in `src/proxy.ts` anpassen: `placeholder` streichen, Ausnahmen nur als ganze Pfadsegmente.
 
 Fertig, wenn eine Änderung in Storyblok nach dem Veröffentlichen auf der Preview erscheint und der Visual Editor Entwürfe live zeigt.
 
