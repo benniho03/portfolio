@@ -4,7 +4,16 @@
 import { useState } from "react";
 import { projects, skills } from "@/content/placeholder";
 import { OvalOrbit } from "./orbit";
-import { AboutSection, CareerSection, Intro, Page, Portrait, ProjectsSection, SocialLinks, ringsByWeight } from "./oval";
+import {
+  AboutSection,
+  CareerSection,
+  Intro,
+  Page,
+  Portrait,
+  ProjectsSection,
+  SocialLinks,
+  ringsByWeight,
+} from "./oval";
 import type { VariantProps } from "./shared";
 
 export const name = "Oval + Filter";
@@ -15,11 +24,18 @@ export function VariantD(props: VariantProps) {
   const { lang } = props;
   const [selected, setSelected] = useState<string>();
   const selectedName = skills.find((skill) => skill.key === selected)?.name;
-  const matches = selected ? projects.filter((project) => project.technologies.includes(selected)).length : 0;
+  const matches = selected
+    ? projects.filter((project) => project.technologies.includes(selected)).length
+    : 0;
 
   return (
     <Page {...props}>
-      <OvalOrbit rings={rings} selected={selected} onSelect={(key) => setSelected(selected === key ? undefined : key)} className="aspect-[4/5] sm:aspect-[12/5]">
+      <OvalOrbit
+        rings={rings}
+        selected={selected}
+        onSelect={(key) => setSelected(selected === key ? undefined : key)}
+        className="aspect-[4/5] sm:aspect-[12/5]"
+      >
         <div className="flex w-[32%] flex-col items-center gap-3 sm:w-[15%]">
           <Portrait className="w-full text-4xl md:text-6xl" />
           <p className="pointer-events-auto rounded-full bg-white px-3 py-1 text-center text-xs text-stone-500 shadow-sm">
@@ -37,7 +53,10 @@ export function VariantD(props: VariantProps) {
       <CareerSection lang={lang} highlight={selected} />
       <ProjectsSection lang={lang} highlight={selected}>
         {selected && (
-          <button onClick={() => setSelected(undefined)} className="mt-3 rounded-full bg-stone-900 px-4 py-1.5 text-sm text-white hover:bg-stone-700">
+          <button
+            onClick={() => setSelected(undefined)}
+            className="mt-3 rounded-full bg-stone-900 px-4 py-1.5 text-sm text-white hover:bg-stone-700"
+          >
             {lang === "de"
               ? `${matches} ${matches === 1 ? "Projekt" : "Projekte"} mit ${selectedName}`
               : `${matches} ${matches === 1 ? "project" : "projects"} using ${selectedName}`}{" "}

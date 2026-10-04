@@ -1,6 +1,15 @@
 // PROTOTYPE: Variante A – breites, flaches Oval mit Foto in der Mitte, Text darunter zentriert.
 import { OvalOrbit } from "./orbit";
-import { AboutSection, CareerSection, Intro, Page, Portrait, ProjectsSection, SocialLinks, ringsByWeight } from "./oval";
+import {
+  AboutSection,
+  CareerSection,
+  Intro,
+  Page,
+  Portrait,
+  ProjectsSection,
+  SocialLinks,
+  ringsByWeight,
+} from "./oval";
 import type { VariantProps } from "./shared";
 
 export const name = "Flaches Oval";

@@ -3,7 +3,15 @@
 // PROTOTYPE: Variante D – Editor/IDE-Optik, Abschnitte als Dateien in einem Datei-Explorer.
 import Image from "next/image";
 import { useState } from "react";
-import { about, labels, projects, skills, socialLinks, stations, technologyByKey } from "@/content/placeholder";
+import {
+  about,
+  labels,
+  projects,
+  skills,
+  socialLinks,
+  stations,
+  technologyByKey,
+} from "@/content/placeholder";
 import { LanguageSwitch, t, type VariantProps } from "../shared";
 
 export const name = "Editor";
@@ -14,8 +22,18 @@ export function VariantD({ lang, variant }: VariantProps) {
   const [open, setOpen] = useState<File>("readme");
   const files: { id: File; name: string; icon: string; color: string }[] = [
     { id: "readme", name: "README.md", icon: "M↓", color: "text-sky-400" },
-    { id: "projects", name: lang === "de" ? "projekte.tsx" : "projects.tsx", icon: "⚛", color: "text-cyan-300" },
-    { id: "career", name: lang === "de" ? "werdegang.json" : "career.json", icon: "{}", color: "text-amber-300" },
+    {
+      id: "projects",
+      name: lang === "de" ? "projekte.tsx" : "projects.tsx",
+      icon: "⚛",
+      color: "text-cyan-300",
+    },
+    {
+      id: "career",
+      name: lang === "de" ? "werdegang.json" : "career.json",
+      icon: "{}",
+      color: "text-amber-300",
+    },
     { id: "skills", name: "skills.ts", icon: "TS", color: "text-blue-400" },
   ];
 
@@ -25,13 +43,17 @@ export function VariantD({ lang, variant }: VariantProps) {
         <span className="size-3 rounded-full bg-[#ff5f57]" />
         <span className="size-3 rounded-full bg-[#febc2e]" />
         <span className="size-3 rounded-full bg-[#28c840]" />
-        <span className="mx-auto text-xs text-neutral-400">benni-holderle — {t(about.role, lang)}</span>
+        <span className="mx-auto text-xs text-neutral-400">
+          benni-holderle — {t(about.role, lang)}
+        </span>
         <LanguageSwitch lang={lang} variant={variant} className="text-xs" />
       </div>
 
       <div className="flex flex-1 flex-col md:flex-row">
         <aside className="border-black bg-[#252526] md:w-60 md:border-r">
-          <p className="px-4 py-2 text-[11px] uppercase tracking-widest text-neutral-500">Explorer</p>
+          <p className="px-4 py-2 text-[11px] uppercase tracking-widest text-neutral-500">
+            Explorer
+          </p>
           <p className="px-4 py-1 text-xs font-bold uppercase">▾ portfolio</p>
           <ul>
             {files.map((file) => (
@@ -82,7 +104,10 @@ export function VariantD({ lang, variant }: VariantProps) {
                 </h1>
                 <p className="mt-6 text-lg text-white">{t(about.intro, lang)}</p>
                 <p className="mt-4">{t(about.bio, lang)}</p>
-                <button onClick={() => setOpen("projects")} className="mt-8 rounded bg-pink-600 px-4 py-2 font-mono text-sm text-white hover:bg-pink-500">
+                <button
+                  onClick={() => setOpen("projects")}
+                  className="mt-8 rounded bg-pink-600 px-4 py-2 font-mono text-sm text-white hover:bg-pink-500"
+                >
                   $ open {files[1].name}
                 </button>
               </article>
@@ -91,29 +116,60 @@ export function VariantD({ lang, variant }: VariantProps) {
             {open === "projects" && (
               <div>
                 <p className="mb-6">
-                  <span className="text-[#c586c0]">export const</span> <span className="text-[#4fc1ff]">{lang === "de" ? "projekte" : "projects"}</span> = [
+                  <span className="text-[#c586c0]">export const</span>{" "}
+                  <span className="text-[#4fc1ff]">{lang === "de" ? "projekte" : "projects"}</span>{" "}
+                  = [
                 </p>
                 <div className="grid gap-6 pl-6 lg:grid-cols-2">
                   {projects.map((project) => (
-                    <article key={project.name} className="overflow-hidden rounded-md border border-white/10 bg-[#252526]">
+                    <article
+                      key={project.name}
+                      className="overflow-hidden rounded-md border border-white/10 bg-[#252526]"
+                    >
                       <div className="relative aspect-video">
-                        <Image src={project.image} alt="" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+                        <Image
+                          src={project.image}
+                          alt=""
+                          fill
+                          sizes="(min-width: 1024px) 40vw, 100vw"
+                          className="object-cover"
+                        />
                       </div>
                       <div className="p-4">
                         <h3 className="text-base text-[#dcdcaa]">
                           {"<"}
                           {project.name.replace(/\s/g, "")} {"/>"}
                         </h3>
-                        <p className="mt-2 font-sans text-neutral-300">{t(project.description, lang)}</p>
+                        <p className="mt-2 font-sans text-neutral-300">
+                          {t(project.description, lang)}
+                        </p>
                         <p className="mt-3 text-xs">
                           <span className="text-[#9cdcfe]">stack</span>=
                           <span className="text-[#ce9178]">
-                            {"{"}[{project.technologies.map((key) => `"${technologyByKey(key).name}"`).join(", ")}]{"}"}
+                            {"{"}[
+                            {project.technologies
+                              .map((key) => `"${technologyByKey(key).name}"`)
+                              .join(", ")}
+                            ]{"}"}
                           </span>
                         </p>
                         <div className="mt-4 flex gap-3 text-xs">
-                          {project.link && <a href={project.link} className="rounded bg-pink-600 px-3 py-1.5 text-white hover:bg-pink-500">{t(labels.visit, lang)} ↗</a>}
-                          {project.githubLink && <a href={project.githubLink} className="rounded border border-white/20 px-3 py-1.5 hover:bg-white/10">GitHub</a>}
+                          {project.link && (
+                            <a
+                              href={project.link}
+                              className="rounded bg-pink-600 px-3 py-1.5 text-white hover:bg-pink-500"
+                            >
+                              {t(labels.visit, lang)} ↗
+                            </a>
+                          )}
+                          {project.githubLink && (
+                            <a
+                              href={project.githubLink}
+                              className="rounded border border-white/20 px-3 py-1.5 hover:bg-white/10"
+                            >
+                              GitHub
+                            </a>
+                          )}
                         </div>
                       </div>
                     </article>
@@ -129,11 +185,41 @@ export function VariantD({ lang, variant }: VariantProps) {
                 {stations.map((station, i) => (
                   <span key={station.organisation}>
                     {"  {\n"}
-                    {"    "}<span className="text-[#9cdcfe]">&quot;{lang === "de" ? "zeitraum" : "period"}&quot;</span>: <span className="text-[#ce9178]">&quot;{station.from} – {station.to ?? t(labels.today, lang)}&quot;</span>,{"\n"}
-                    {"    "}<span className="text-[#9cdcfe]">&quot;{lang === "de" ? "rolle" : "role"}&quot;</span>: <span className="text-[#ce9178]">&quot;{t(station.role, lang)}&quot;</span>,{"\n"}
-                    {"    "}<span className="text-[#9cdcfe]">&quot;{lang === "de" ? "bei" : "at"}&quot;</span>: <span className="text-[#ce9178]">&quot;{station.organisation}&quot;</span>,{"\n"}
-                    {"    "}<span className="text-[#9cdcfe]">&quot;info&quot;</span>: <span className="text-[#ce9178]">&quot;{t(station.description, lang)}&quot;</span>,{"\n"}
-                    {"    "}<span className="text-[#9cdcfe]">&quot;stack&quot;</span>: [{station.technologies.map((key) => <span key={key} className="text-[#ce9178]">&quot;{technologyByKey(key).name}&quot; </span>)}]{"\n"}
+                    {"    "}
+                    <span className="text-[#9cdcfe]">
+                      &quot;{lang === "de" ? "zeitraum" : "period"}&quot;
+                    </span>
+                    :{" "}
+                    <span className="text-[#ce9178]">
+                      &quot;{station.from} – {station.to ?? t(labels.today, lang)}&quot;
+                    </span>
+                    ,{"\n"}
+                    {"    "}
+                    <span className="text-[#9cdcfe]">
+                      &quot;{lang === "de" ? "rolle" : "role"}&quot;
+                    </span>
+                    : <span className="text-[#ce9178]">&quot;{t(station.role, lang)}&quot;</span>,
+                    {"\n"}
+                    {"    "}
+                    <span className="text-[#9cdcfe]">
+                      &quot;{lang === "de" ? "bei" : "at"}&quot;
+                    </span>
+                    : <span className="text-[#ce9178]">&quot;{station.organisation}&quot;</span>,
+                    {"\n"}
+                    {"    "}
+                    <span className="text-[#9cdcfe]">&quot;info&quot;</span>:{" "}
+                    <span className="text-[#ce9178]">
+                      &quot;{t(station.description, lang)}&quot;
+                    </span>
+                    ,{"\n"}
+                    {"    "}
+                    <span className="text-[#9cdcfe]">&quot;stack&quot;</span>: [
+                    {station.technologies.map((key) => (
+                      <span key={key} className="text-[#ce9178]">
+                        &quot;{technologyByKey(key).name}&quot;{" "}
+                      </span>
+                    ))}
+                    ]{"\n"}
                     {i < stations.length - 1 ? "  },\n" : "  }\n"}
                   </span>
                 ))}
@@ -144,12 +230,26 @@ export function VariantD({ lang, variant }: VariantProps) {
             {open === "skills" && (
               <div>
                 <p className="mb-6">
-                  <span className="text-[#c586c0]">export const</span> <span className="text-[#4fc1ff]">skills</span> = [
+                  <span className="text-[#c586c0]">export const</span>{" "}
+                  <span className="text-[#4fc1ff]">skills</span> = [
                 </p>
                 <ul className="grid max-w-3xl grid-cols-2 gap-3 pl-6 sm:grid-cols-3">
                   {skills.map((skill) => (
-                    <li key={skill.key} className="flex items-center gap-3 rounded border border-white/10 bg-[#252526] px-3 py-3">
-                      {skill.logo ? <Image src={skill.logo} alt="" width={20} height={20} className="object-contain" /> : <span className="size-5 rounded-sm bg-gradient-to-br from-pink-500 to-amber-400" />}
+                    <li
+                      key={skill.key}
+                      className="flex items-center gap-3 rounded border border-white/10 bg-[#252526] px-3 py-3"
+                    >
+                      {skill.logo ? (
+                        <Image
+                          src={skill.logo}
+                          alt=""
+                          width={20}
+                          height={20}
+                          className="object-contain"
+                        />
+                      ) : (
+                        <span className="size-5 rounded-sm bg-gradient-to-br from-pink-500 to-amber-400" />
+                      )}
                       <span className="text-[#ce9178]">&quot;{skill.name}&quot;</span>
                     </li>
                   ))}

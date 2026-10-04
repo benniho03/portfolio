@@ -20,13 +20,19 @@ export default async function Startseite({ params, searchParams }: PageProps<"/[
   if (!hasLocale(lang)) notFound();
 
   const requested = (await searchParams).variant;
-  const key = typeof requested === "string" && requested in variants ? (requested as keyof typeof variants) : "A";
+  const key =
+    typeof requested === "string" && requested in variants
+      ? (requested as keyof typeof variants)
+      : "A";
   const { Component } = variants[key];
 
   return (
     <>
       <Component lang={lang} variant={key} />
-      <PrototypeSwitcher variants={Object.entries(variants).map(([k, v]) => ({ key: k, name: v.name }))} current={key} />
+      <PrototypeSwitcher
+        variants={Object.entries(variants).map(([k, v]) => ({ key: k, name: v.name }))}
+        current={key}
+      />
     </>
   );
 }

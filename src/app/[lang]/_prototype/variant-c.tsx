@@ -1,7 +1,16 @@
 // PROTOTYPE: Variante C – Text links, Oval mit Foto rechts; der Hero bleibt so niedrig wie ein Bildschirm.
 import { labels } from "@/content/placeholder";
 import { OvalOrbit } from "./orbit";
-import { AboutSection, CareerSection, Intro, Page, Portrait, ProjectsSection, SocialLinks, ringsByWeight } from "./oval";
+import {
+  AboutSection,
+  CareerSection,
+  Intro,
+  Page,
+  Portrait,
+  ProjectsSection,
+  SocialLinks,
+  ringsByWeight,
+} from "./oval";
 import { t, type VariantProps } from "./shared";
 
 export const name = "Split";
@@ -18,7 +27,10 @@ export function VariantC(props: VariantProps) {
           <Intro lang={lang} />
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <SocialLinks />
-            <a href="#projects" className="rounded-full px-5 py-2.5 font-medium ring-1 ring-stone-900 hover:bg-white">
+            <a
+              href="#projects"
+              className="rounded-full px-5 py-2.5 font-medium ring-1 ring-stone-900 hover:bg-white"
+            >
               {t(labels.projects, lang)} ↓
             </a>
           </div>

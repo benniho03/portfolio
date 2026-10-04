@@ -4,10 +4,17 @@ import { ProjectTiles } from "./bento";
 import type { Ring } from "./orbit";
 import { LanguageSwitch, t, type VariantProps } from "./shared";
 
-const logoSizes = { 3: "size-9 md:size-14", 2: "size-7 md:size-10", 1: "size-5 md:size-8" } as const;
+const logoSizes = {
+  3: "size-9 md:size-14",
+  2: "size-7 md:size-10",
+  1: "size-5 md:size-8",
+} as const;
 
 /** Ein Ring pro Gewichtung, innen die wichtigsten Skills; Ringe laufen abwechselnd in Gegenrichtung. */
-export function ringsByWeight(axes: Record<1 | 2 | 3, [rx: number, ry: number]>, period = 45): Ring[] {
+export function ringsByWeight(
+  axes: Record<1 | 2 | 3, [rx: number, ry: number]>,
+  period = 45,
+): Ring[] {
   return ([3, 2, 1] as const).map((weight, i) => ({
     items: skills.filter((skill) => skill.weight === weight),
     rx: axes[weight][0],
@@ -23,8 +30,12 @@ export function Page({ lang, variant, children }: VariantProps & { children: Rea
       <header className="mx-auto flex max-w-6xl items-center justify-between px-4 py-6">
         <span className="text-lg font-bold">benni.</span>
         <nav className="flex items-center gap-6 text-sm">
-          <a href="#about" className="hover:underline">{t(labels.about, lang)}</a>
-          <a href="#projects" className="hover:underline">{t(labels.projects, lang)}</a>
+          <a href="#about" className="hover:underline">
+            {t(labels.about, lang)}
+          </a>
+          <a href="#projects" className="hover:underline">
+            {t(labels.projects, lang)}
+          </a>
           <LanguageSwitch lang={lang} variant={variant} />
         </nav>
       </header>
@@ -42,18 +53,32 @@ export function Page({ lang, variant, children }: VariantProps & { children: Rea
 /** Platzhalter, bis ein echtes Foto aus dem CMS kommt. */
 export function Portrait({ className = "" }: { className?: string }) {
   return (
-    <div className={`relative grid aspect-square place-items-center rounded-full bg-gradient-to-br from-pink-600 to-amber-400 font-bold text-white shadow-xl ring-8 ring-white ${className}`}>
+    <div
+      className={`relative grid aspect-square place-items-center rounded-full bg-gradient-to-br from-pink-600 to-amber-400 font-bold text-white shadow-xl ring-8 ring-white ${className}`}
+    >
       b.
-      <span className="absolute bottom-[16%] text-[10px] font-medium uppercase tracking-widest opacity-80">[Foto]</span>
+      <span className="absolute bottom-[16%] text-[10px] font-medium uppercase tracking-widest opacity-80">
+        [Foto]
+      </span>
     </div>
   );
 }
 
-export function Intro({ lang, className = "" }: { lang: VariantProps["lang"]; className?: string }) {
+export function Intro({
+  lang,
+  className = "",
+}: {
+  lang: VariantProps["lang"];
+  className?: string;
+}) {
   return (
     <div className={className}>
-      <p className="text-sm font-medium uppercase tracking-widest text-stone-500">{t(about.role, lang)}</p>
-      <h1 className="mt-3 text-5xl font-bold leading-none md:text-7xl">{t(about.greeting, lang)}</h1>
+      <p className="text-sm font-medium uppercase tracking-widest text-stone-500">
+        {t(about.role, lang)}
+      </p>
+      <h1 className="mt-3 text-5xl font-bold leading-none md:text-7xl">
+        {t(about.greeting, lang)}
+      </h1>
       <p className="mt-6 max-w-xl text-lg text-stone-600">{t(about.intro, lang)}</p>
     </div>
   );
@@ -63,9 +88,15 @@ export function SocialLinks({ className = "" }: { className?: string }) {
   return (
     <div className={`flex flex-wrap gap-3 ${className}`}>
       {socialLinks.map((link) => (
-        <a key={link.label} href={link.href} className="group inline-flex items-center gap-2 rounded-full bg-stone-900 px-5 py-2.5 font-medium text-white hover:bg-stone-700">
+        <a
+          key={link.label}
+          href={link.href}
+          className="group inline-flex items-center gap-2 rounded-full bg-stone-900 px-5 py-2.5 font-medium text-white hover:bg-stone-700"
+        >
           {link.label}
-          <span className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
+          <span className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+            ↗
+          </span>
         </a>
       ))}
     </div>
@@ -76,14 +107,23 @@ const sectionLabel = "text-sm font-medium uppercase tracking-widest text-stone-5
 
 export function AboutSection({ lang }: { lang: VariantProps["lang"] }) {
   return (
-    <section id="about" className="grid scroll-mt-6 gap-4 border-t border-stone-300 pt-10 mt-24 md:grid-cols-[1fr_3fr]">
+    <section
+      id="about"
+      className="grid scroll-mt-6 gap-4 border-t border-stone-300 pt-10 mt-24 md:grid-cols-[1fr_3fr]"
+    >
       <h2 className={sectionLabel}>{t(labels.about, lang)}</h2>
       <p className="text-2xl leading-snug md:text-3xl">{t(about.bio, lang)}</p>
     </section>
   );
 }
 
-export function CareerSection({ lang, highlight }: { lang: VariantProps["lang"]; highlight?: string }) {
+export function CareerSection({
+  lang,
+  highlight,
+}: {
+  lang: VariantProps["lang"];
+  highlight?: string;
+}) {
   return (
     <section className="mt-16 grid gap-4 border-t border-stone-300 pt-10 md:grid-cols-[1fr_3fr]">
       <h2 className={sectionLabel}>{t(labels.career, lang)}</h2>
@@ -107,7 +147,15 @@ export function CareerSection({ lang, highlight }: { lang: VariantProps["lang"];
   );
 }
 
-export function ProjectsSection({ lang, highlight, children }: { lang: VariantProps["lang"]; highlight?: string; children?: React.ReactNode }) {
+export function ProjectsSection({
+  lang,
+  highlight,
+  children,
+}: {
+  lang: VariantProps["lang"];
+  highlight?: string;
+  children?: React.ReactNode;
+}) {
   return (
     <section id="projects" className="mt-24 scroll-mt-6">
       <h2 className="text-4xl font-bold">

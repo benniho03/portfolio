@@ -4,13 +4,13 @@ Festgelegt nach drei Prototyp-Runden: **Variante C „Split“ aus Runde 3**. Di
 
 Der Prototyp ist die Referenz für alle Details, die hier fehlen. Er läuft unter `/de?variant=C`, bis der Prototyp-Code entfernt wird:
 
-| Datei unter `src/app/[lang]/_prototype/` | Inhalt |
-| --- | --- |
-| `variant-c.tsx` | Aufbau der Startseite |
-| `oval.tsx` | Seitenrahmen, Porträt, Abschnitte, `ringsByWeight` |
-| `orbit.tsx` | `OvalOrbit` (Client-Komponente) |
-| `bento.tsx` | `ProjectTiles`, `SkillLogo` (der Rest der Datei gehört zu Runde 2) |
-| `shared.tsx` | `LanguageSwitch`, `t()` |
+| Datei unter `src/app/[lang]/_prototype/` | Inhalt                                                             |
+| ---------------------------------------- | ------------------------------------------------------------------ |
+| `variant-c.tsx`                          | Aufbau der Startseite                                              |
+| `oval.tsx`                               | Seitenrahmen, Porträt, Abschnitte, `ringsByWeight`                 |
+| `orbit.tsx`                              | `OvalOrbit` (Client-Komponente)                                    |
+| `bento.tsx`                              | `ProjectTiles`, `SkillLogo` (der Rest der Datei gehört zu Runde 2) |
+| `shared.tsx`                             | `LanguageSwitch`, `t()`                                            |
 
 Die Runden 1 und 2 liegen in `runde-1/` und `runde-2/` und sind verworfen.
 
@@ -42,11 +42,11 @@ Das Kernelement des Designs. Die Logos der Skills kreisen auf **ovalen** Bahnen 
 - Container im Seitenverhältnis `6/5`. Gestrichelte Ellipsen (`stone-300`) zeigen die Bahnen.
 - Drei Ringe, einer pro Gewichtung. Halbachsen in Prozent der Containerbreite bzw. -höhe:
 
-  | Ring | Gewichtung | rx / ry | Umlaufzeit | Logogröße mobil / ab `md` |
-  | --- | --- | --- | --- | --- |
-  | innen | 3 | 22 / 25 | 45 s | `size-9` / `size-14` |
-  | mitte | 2 | 34 / 37 | 72 s, gegenläufig | `size-7` / `size-10` |
-  | außen | 1 | 46 / 47 | 99 s | `size-5` / `size-8` |
+  | Ring  | Gewichtung | rx / ry | Umlaufzeit        | Logogröße mobil / ab `md` |
+  | ----- | ---------- | ------- | ----------------- | ------------------------- |
+  | innen | 3          | 22 / 25 | 45 s              | `size-9` / `size-14`      |
+  | mitte | 2          | 34 / 37 | 72 s, gegenläufig | `size-7` / `size-10`      |
+  | außen | 1          | 46 / 47 | 99 s              | `size-5` / `size-8`       |
 
 - Logos sitzen in weißen, abgerundeten Badges mit Schatten und bleiben beim Kreisen aufrecht.
 - Hover oder Fokus auf ein Logo hält den Orbit an und zeigt den Namen als Tooltip.

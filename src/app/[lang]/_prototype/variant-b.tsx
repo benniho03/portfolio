@@ -1,6 +1,15 @@
 // PROTOTYPE: Variante B – gekippte Umlaufbahnen mit Tiefe; Logos ziehen hinter dem Foto vorbei.
 import { OvalOrbit } from "./orbit";
-import { AboutSection, CareerSection, Intro, Page, Portrait, ProjectsSection, SocialLinks, ringsByWeight } from "./oval";
+import {
+  AboutSection,
+  CareerSection,
+  Intro,
+  Page,
+  Portrait,
+  ProjectsSection,
+  SocialLinks,
+  ringsByWeight,
+} from "./oval";
 import type { VariantProps } from "./shared";
 
 export const name = "3D-Ring";

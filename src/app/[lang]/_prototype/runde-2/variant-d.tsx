@@ -3,7 +3,17 @@
 // PROTOTYPE: Variante D – klickbare Wortwolke; ein Skill hebt die Projekte und Stationen hervor, die ihn nutzen.
 import { useState } from "react";
 import { labels, projects, skills } from "@/content/placeholder";
-import { AboutTile, BentoPage, CareerTile, IntroTile, ProjectTiles, ProjectsHeading, SkillLogo, SocialTiles, tile } from "../bento";
+import {
+  AboutTile,
+  BentoPage,
+  CareerTile,
+  IntroTile,
+  ProjectTiles,
+  ProjectsHeading,
+  SkillLogo,
+  SocialTiles,
+  tile,
+} from "../bento";
 import { t, type VariantProps } from "../shared";
 
 export const name = "Filter-Wolke";
@@ -13,13 +23,24 @@ const chipSize = {
   2: "text-xl md:text-2xl gap-2.5 px-4 py-2.5 [&_img]:size-7",
   1: "text-base gap-2 px-3 py-2 text-stone-600 [&_img]:size-5",
 } as const;
-const offsets = ["translate-y-1", "-translate-y-2", "translate-y-3", "-translate-y-1", "translate-y-0", "-translate-y-3"];
+const offsets = [
+  "translate-y-1",
+  "-translate-y-2",
+  "translate-y-3",
+  "-translate-y-1",
+  "translate-y-0",
+  "-translate-y-3",
+];
 
 export function VariantD(props: VariantProps) {
   const { lang } = props;
   const [selected, setSelected] = useState<string>();
-  const ordered = [...skills].sort((a, b) => (a.key.length % 3) - (b.key.length % 3) || a.name.localeCompare(b.name));
-  const matches = selected ? projects.filter((project) => project.technologies.includes(selected)).length : 0;
+  const ordered = [...skills].sort(
+    (a, b) => (a.key.length % 3) - (b.key.length % 3) || a.name.localeCompare(b.name),
+  );
+  const matches = selected
+    ? projects.filter((project) => project.technologies.includes(selected)).length
+    : 0;
   const selectedName = skills.find((skill) => skill.key === selected)?.name;
 
   return (
@@ -30,7 +51,9 @@ export function VariantD(props: VariantProps) {
 
       <section className={`${tile} md:col-span-4`}>
         <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 className="text-sm font-medium uppercase tracking-widest text-stone-500">{t(labels.skills, lang)}</h2>
+          <h2 className="text-sm font-medium uppercase tracking-widest text-stone-500">
+            {t(labels.skills, lang)}
+          </h2>
           <p className="text-sm text-stone-500">
             {selected
               ? lang === "de"
@@ -47,7 +70,11 @@ export function VariantD(props: VariantProps) {
               <button
                 onClick={() => setSelected(selected === skill.key ? undefined : skill.key)}
                 className={`flex items-center rounded-full font-bold transition hover:-rotate-2 hover:scale-105 ${chipSize[skill.weight]} ${
-                  selected === skill.key ? "bg-stone-900 text-white" : selected ? "opacity-40" : "hover:bg-stone-100"
+                  selected === skill.key
+                    ? "bg-stone-900 text-white"
+                    : selected
+                      ? "opacity-40"
+                      : "hover:bg-stone-100"
                 }`}
               >
                 <SkillLogo skill={skill} />

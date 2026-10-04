@@ -1,6 +1,16 @@
 // PROTOTYPE: Variante C – Skills kreisen auf drei Umlaufbahnen um den Namen.
 import { about, skills } from "@/content/placeholder";
-import { AboutTile, BentoPage, CareerTile, IntroTile, ProjectTiles, ProjectsHeading, SkillLogo, SocialTiles, tile } from "../bento";
+import {
+  AboutTile,
+  BentoPage,
+  CareerTile,
+  IntroTile,
+  ProjectTiles,
+  ProjectsHeading,
+  SkillLogo,
+  SocialTiles,
+  tile,
+} from "../bento";
 import { t, type VariantProps } from "../shared";
 
 export const name = "Orbit";
@@ -26,16 +36,25 @@ export function VariantC(props: VariantProps) {
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-stone-300"
                 style={{ width: `${ring.diameter}%`, height: `${ring.diameter}%` }}
               >
-                <div className="size-full animate-orbit" style={{ "--orbit-duration": ring.duration } as React.CSSProperties}>
+                <div
+                  className="size-full animate-orbit"
+                  style={{ "--orbit-duration": ring.duration } as React.CSSProperties}
+                >
                   {items.map((skill, i) => {
                     const angle = ((2 * Math.PI) / items.length) * i + ring.weight;
                     return (
                       <div
                         key={skill.key}
                         className="absolute size-0"
-                        style={{ left: `${50 + 50 * Math.cos(angle)}%`, top: `${50 + 50 * Math.sin(angle)}%` }}
+                        style={{
+                          left: `${50 + 50 * Math.cos(angle)}%`,
+                          top: `${50 + 50 * Math.sin(angle)}%`,
+                        }}
                       >
-                        <div className="w-max animate-counter-orbit -translate-x-1/2 -translate-y-1/2" style={{ "--orbit-duration": ring.duration } as React.CSSProperties}>
+                        <div
+                          className="w-max animate-counter-orbit -translate-x-1/2 -translate-y-1/2"
+                          style={{ "--orbit-duration": ring.duration } as React.CSSProperties}
+                        >
                           <div className="group relative rounded-2xl bg-white p-2 shadow-md ring-1 ring-black/5">
                             <SkillLogo skill={skill} className={ring.logo} />
                             <span className="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded-full bg-stone-900 px-2 py-0.5 text-xs text-white opacity-0 transition group-hover:opacity-100">
@@ -53,7 +72,9 @@ export function VariantC(props: VariantProps) {
           <div className="absolute inset-0 grid place-items-center text-center">
             <div>
               <p className="text-6xl font-bold md:text-8xl">benni.</p>
-              <p className="mt-2 text-sm uppercase tracking-widest text-stone-500">{t(about.role, lang)}</p>
+              <p className="mt-2 text-sm uppercase tracking-widest text-stone-500">
+                {t(about.role, lang)}
+              </p>
             </div>
           </div>
         </div>

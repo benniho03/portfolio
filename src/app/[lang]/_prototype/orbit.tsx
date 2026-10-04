@@ -24,7 +24,8 @@ type Props = {
   children?: React.ReactNode;
 };
 
-const startAngle = (ringIndex: number, itemIndex: number, count: number) => ((2 * Math.PI) / count) * itemIndex + ringIndex * 0.9;
+const startAngle = (ringIndex: number, itemIndex: number, count: number) =>
+  ((2 * Math.PI) / count) * itemIndex + ringIndex * 0.9;
 
 function placement(ring: Ring, angle: number, depth: boolean) {
   const sin = Math.sin(angle);
@@ -38,7 +39,14 @@ function placement(ring: Ring, angle: number, depth: boolean) {
   };
 }
 
-export function OvalOrbit({ rings, depth = false, selected, onSelect, className = "", children }: Props) {
+export function OvalOrbit({
+  rings,
+  depth = false,
+  selected,
+  onSelect,
+  className = "",
+  children,
+}: Props) {
   const nodes = useRef(new Map<string, HTMLDivElement>());
   const paused = useRef(false);
 
@@ -66,7 +74,12 @@ export function OvalOrbit({ rings, depth = false, selected, onSelect, className 
     return () => cancelAnimationFrame(frame);
   }, [rings, depth]);
 
-  const hold = { onMouseEnter: () => (paused.current = true), onMouseLeave: () => (paused.current = false), onFocus: () => (paused.current = true), onBlur: () => (paused.current = false) };
+  const hold = {
+    onMouseEnter: () => (paused.current = true),
+    onMouseLeave: () => (paused.current = false),
+    onFocus: () => (paused.current = true),
+    onBlur: () => (paused.current = false),
+  };
 
   return (
     <div className={`relative w-full ${className}`}>
@@ -78,13 +91,19 @@ export function OvalOrbit({ rings, depth = false, selected, onSelect, className 
         />
       ))}
 
-      <div className="pointer-events-none absolute inset-0 z-10 grid place-items-center">{children}</div>
+      <div className="pointer-events-none absolute inset-0 z-10 grid place-items-center">
+        {children}
+      </div>
 
       {rings.map((ring, r) =>
         ring.items.map((skill, i) => {
           const isSelected = selected === skill.key;
           const badge = `group relative block rounded-2xl bg-white p-2 shadow-md ring-1 transition ${
-            isSelected ? "scale-125 ring-2 ring-stone-900" : selected ? "opacity-40 ring-black/5" : "ring-black/5"
+            isSelected
+              ? "scale-125 ring-2 ring-stone-900"
+              : selected
+                ? "opacity-40 ring-black/5"
+                : "ring-black/5"
           }`;
           const content = (
             <>
@@ -105,7 +124,13 @@ export function OvalOrbit({ rings, depth = false, selected, onSelect, className 
               style={placement(ring, startAngle(r, i, ring.items.length), depth)}
             >
               {onSelect ? (
-                <button type="button" aria-pressed={isSelected} onClick={() => onSelect(skill.key)} className={`${badge} cursor-pointer hover:scale-110`} {...hold}>
+                <button
+                  type="button"
+                  aria-pressed={isSelected}
+                  onClick={() => onSelect(skill.key)}
+                  className={`${badge} cursor-pointer hover:scale-110`}
+                  {...hold}
+                >
                   {content}
                 </button>
               ) : (

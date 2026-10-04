@@ -34,7 +34,11 @@ export function PrototypeSwitcher({ variants, current }: { variants: Variant[]; 
 
   return (
     <div className="fixed bottom-5 left-1/2 z-[100] flex -translate-x-1/2 items-center gap-1 rounded-full border border-white/20 bg-black/90 p-1 font-sans text-sm text-white shadow-2xl ring-1 ring-black/50 backdrop-blur">
-      <button onClick={() => go(-1)} className="rounded-full px-3 py-1.5 hover:bg-white/15" aria-label="Vorherige Variante">
+      <button
+        onClick={() => go(-1)}
+        className="rounded-full px-3 py-1.5 hover:bg-white/15"
+        aria-label="Vorherige Variante"
+      >
         ←
       </button>
       <span className="min-w-56 px-2 text-center tabular-nums">
@@ -44,7 +48,11 @@ export function PrototypeSwitcher({ variants, current }: { variants: Variant[]; 
           {index + 1}/{variants.length}
         </span>
       </span>
-      <button onClick={() => go(1)} className="rounded-full px-3 py-1.5 hover:bg-white/15" aria-label="Nächste Variante">
+      <button
+        onClick={() => go(1)}
+        className="rounded-full px-3 py-1.5 hover:bg-white/15"
+        aria-label="Nächste Variante"
+      >
         →
       </button>
     </div>
