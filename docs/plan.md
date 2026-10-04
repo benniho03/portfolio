@@ -21,9 +21,9 @@ Begriffe stehen in [`GLOSSARY.md`](../GLOSSARY.md), das Design in [`design.md`](
 
 ## Phase 0: Repo
 
-- [ ] Git-Identität setzen.
-- [ ] Ersten Commit erstellen, inklusive Prototyp.
-- [ ] Repo `benniho03/portfolio` auf GitHub anlegen und pushen.
+- [x] Git-Identität setzen.
+- [x] Ersten Commit erstellen, inklusive Prototyp.
+- [x] Repo `benniho03/portfolio` auf GitHub anlegen und pushen.
 
 Fertig, wenn der Code auf GitHub liegt.
 
