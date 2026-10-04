@@ -9,6 +9,7 @@ function preferredLocale(request: NextRequest) {
       const [tag, q] = part.trim().split(";q=");
       return { lang: tag.slice(0, 2).toLowerCase(), q: q ? Number(q) : 1 };
     })
+    .filter(({ q }) => q > 0)
     .sort((a, b) => b.q - a.q);
   return languages.find(({ lang }) => hasLocale(lang))?.lang ?? defaultLocale;
 }
