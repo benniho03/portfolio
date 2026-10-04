@@ -17,7 +17,7 @@ Begriffe stehen in [`GLOSSARY.md`](../GLOSSARY.md), das Design in [`design.md`](
 - **Aktualisierung:** Die Seite wird statisch ausgeliefert. Beim Veröffentlichen löst ein Storyblok-Webhook die Revalidierung aus.
 - **Live-Vorschau:** Draft Mode von Next.js auf der Produktiv-Website, abgesichert über ein geheimes Token.
 - **Statistik:** keine.
-- **Qualität:** Pre-commit-Hook mit Lint, Typecheck und Unit-Tests (Vitest). Getestet wird die Logik mit echtem Risiko: Sprachwahl im Proxy und die Abbildung der Storyblok-Daten auf die Domänentypen. Das Layout wird visuell in der Preview geprüft, E2E-Tests gibt es nicht.
+- **Qualität:** Pre-commit-Hook mit Lint, Prettier, Typecheck und Unit-Tests (Vitest). Getestet wird die Logik mit echtem Risiko: Sprachwahl im Proxy und die Abbildung der Storyblok-Daten auf die Domänentypen. Das Layout wird visuell in der Preview geprüft, E2E-Tests gibt es nicht.
 
 ## Phase 0: Repo
 
@@ -29,9 +29,10 @@ Fertig, wenn der Code auf GitHub liegt.
 
 ## Phase 1: Qualitäts-Grundlage
 
-- [ ] Vitest einrichten.
-- [ ] Unit-Tests für die Sprachwahl in `src/proxy.ts`.
-- [ ] Husky und lint-staged: Lint, Typecheck und Tests vor jedem Commit.
+- [x] Vitest einrichten.
+- [x] Unit-Tests für die Sprachwahl in `src/proxy.ts`.
+- [x] Prettier einführen und den Code einmal formatieren.
+- [x] Husky und lint-staged: Lint (ohne Warnungen), Formatierung, Typecheck und Tests vor jedem Commit.
 
 Fertig, wenn ein Commit mit Lint-, Typ- oder Testfehlern blockiert wird.
 
