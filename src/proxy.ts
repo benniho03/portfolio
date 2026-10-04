@@ -6,7 +6,8 @@ function preferredLocale(request: NextRequest) {
   const languages = header
     .split(",")
     .map((part) => {
-      const [tag, q] = part.trim().split(";q=");
+      const [tag, ...params] = part.split(";").map((segment) => segment.trim());
+      const q = params.find((param) => param.startsWith("q="))?.slice(2);
       return { lang: tag.slice(0, 2).toLowerCase(), q: q ? Number(q) : 1 };
     })
     .filter(({ q }) => q > 0)

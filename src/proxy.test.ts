@@ -13,7 +13,7 @@ const request = (path: string, acceptLanguage?: string) =>
 
 const redirectTarget = (path: string, acceptLanguage?: string) => {
   const response = proxy(request(path, acceptLanguage));
-  return response && getRedirectUrl(response);
+  return response ? getRedirectUrl(response) : null;
 };
 
 describe("proxy", () => {
@@ -22,8 +22,13 @@ describe("proxy", () => {
     expect(redirectTarget("/", "en-US,en;q=0.9")).toBe("https://holderle.de/en");
   });
 
-  test("bevorzugt die Sprache mit der höchsten Gewichtung, unabhängig von der Reihenfolge", () => {
+  test("bevorzugt die Sprache mit der höchsten Priorität, unabhängig von der Reihenfolge", () => {
     expect(redirectTarget("/", "de;q=0.5,en;q=0.9")).toBe("https://holderle.de/en");
+  });
+
+  test("liest die Priorität auch mit Leerzeichen und weiteren Parametern", () => {
+    expect(redirectTarget("/", "en; q=0.5, de ; q=0.9")).toBe("https://holderle.de/de");
+    expect(redirectTarget("/", "en;level=1;q=0.5,de;q=0.9")).toBe("https://holderle.de/de");
   });
 
   test("überspringt nicht unterstützte Sprachen", () => {
@@ -46,8 +51,8 @@ describe("proxy", () => {
   });
 
   test("lässt Adressen mit Sprache unverändert durch", () => {
-    expect(proxy(request("/de", "en"))).toBeUndefined();
-    expect(proxy(request("/en/impressum", "de"))).toBeUndefined();
+    expect(redirectTarget("/de", "en")).toBeNull();
+    expect(redirectTarget("/en/impressum", "de")).toBeNull();
   });
 
   test("erkennt ein Sprachpräfix nur als ganzes Pfadsegment", () => {
