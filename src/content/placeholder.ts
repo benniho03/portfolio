@@ -81,6 +81,7 @@ export const about = {
 export const socialLinks: SocialLink[] = [
   { label: "GitHub", href: "https://github.com/benniho03" },
   { label: "LinkedIn", href: "https://www.linkedin.com/" },
+  { label: "E-Mail", href: "mailto:benniho03@gmail.com" },
 ];
 
 export const stations: Station[] = [
@@ -198,3 +199,32 @@ export const labels = {
   imprint: { de: "Impressum", en: "Legal notice" },
   privacy: { de: "Datenschutz", en: "Privacy" },
 } satisfies Record<string, Localized>;
+
+export const legalPages = {
+  impressum: {
+    title: { de: "Impressum", en: "Legal notice" },
+    paragraphs: [
+      {
+        de: "[Impressum] Angaben gemäß § 5 DDG: Benni Holderle, [Straße und Hausnummer], [PLZ und Ort].",
+        en: "[Legal notice] Information pursuant to § 5 DDG: Benni Holderle, [street and number], [postcode and city].",
+      },
+      {
+        de: "[Kontakt] E-Mail: [E-Mail-Adresse]",
+        en: "[Contact] Email: [email address]",
+      },
+    ],
+  },
+  datenschutz: {
+    title: { de: "Datenschutz", en: "Privacy" },
+    paragraphs: [
+      {
+        de: "[Datenschutzerklärung] Der endgültige Text kommt aus einem Generator und wird über das CMS gepflegt.",
+        en: "[Privacy policy] The final text will come from a generator and be maintained in the CMS.",
+      },
+      {
+        de: "[Hosting] Diese Website wird bei Vercel gehostet. Es werden keine Statistik-Tools eingesetzt.",
+        en: "[Hosting] This website is hosted by Vercel. No analytics tools are used.",
+      },
+    ],
+  },
+} satisfies Record<string, { title: Localized; paragraphs: Localized[] }>;

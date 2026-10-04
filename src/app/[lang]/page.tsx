@@ -1,38 +1,26 @@
 import { notFound } from "next/navigation";
-import { PrototypeSwitcher } from "@/components/prototype-switcher";
+import { AboutSection } from "@/components/about-section";
+import { CareerSection } from "@/components/career-section";
+import { Hero } from "@/components/hero";
+import { ProjectsSection } from "@/components/projects-section";
+import { getHomepage, getSettings } from "@/content";
 import { hasLocale } from "@/i18n";
-import * as A from "./_prototype/variant-a";
-import * as B from "./_prototype/variant-b";
-import * as C from "./_prototype/variant-c";
-import * as D from "./_prototype/variant-d";
 
-// PROTOTYPE: Runde 3 – vier Varianten des ovalen Skill-Orbits mit Foto, umschaltbar über ?variant=A|B|C|D.
-// Runde 1 und 2 liegen unter ./_prototype/runde-1 bzw. ./_prototype/runde-2 (nicht eingebunden).
-const variants = {
-  A: { name: A.name, Component: A.VariantA },
-  B: { name: B.name, Component: B.VariantB },
-  C: { name: C.name, Component: C.VariantC },
-  D: { name: D.name, Component: D.VariantD },
-};
-
-export default async function Startseite({ params, searchParams }: PageProps<"/[lang]">) {
+export default async function Startseite({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
-
-  const requested = (await searchParams).variant;
-  const key =
-    typeof requested === "string" && requested in variants
-      ? (requested as keyof typeof variants)
-      : "A";
-  const { Component } = variants[key];
+  const [settings, { about, skills, stations, projects }] = await Promise.all([
+    getSettings(lang),
+    getHomepage(lang),
+  ]);
+  const { labels } = settings;
 
   return (
     <>
-      <Component lang={lang} variant={key} />
-      <PrototypeSwitcher
-        variants={Object.entries(variants).map(([k, v]) => ({ key: k, name: v.name }))}
-        current={key}
-      />
+      <Hero settings={settings} skills={skills} />
+      <AboutSection about={about} heading={labels.about} />
+      <CareerSection stations={stations} heading={labels.career} today={labels.today} />
+      <ProjectsSection projects={projects} labels={labels} />
     </>
   );
 }
