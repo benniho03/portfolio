@@ -50,7 +50,7 @@ Fertig, wenn `/de` und `/en` Variante C ohne Prototyp-Code zeigen.
 
 ## Phase 3: Vercel-Preview
 
-- [ ] Vercel-Projekt anlegen und mit dem GitHub-Repo verbinden.
+- [x] Vercel-Projekt anlegen und mit dem GitHub-Repo verbinden.
 
 Fertig, wenn jeder Push eine Preview-URL erzeugt.
 
