@@ -41,6 +41,16 @@ const components = [
 		is_root: true,
 		is_nestable: false,
 		schema: {
+			meta_title: text("Seitentitel", {
+				...translatable,
+				...required,
+				description: "Titel im Browser-Tab, in Suchergebnissen und im Vorschaubild.",
+			}),
+			meta_description: textarea("Seitenbeschreibung", {
+				...translatable,
+				...required,
+				description: "Für Suchergebnisse und Vorschauen, höchstens etwa 160 Zeichen.",
+			}),
 			role: text("Rolle", { ...translatable, ...required }),
 			greeting: text("Begrüßung", { ...translatable, ...required }),
 			intro: textarea("Intro", { ...translatable, ...required }),

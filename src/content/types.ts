@@ -44,8 +44,12 @@ export type Labels = Record<
 	string
 >;
 
-/** Globale Einstellungen: UI-Texte, Social Links und die Vorstellung im Hero. */
+/** Titel und Beschreibung für Suchmaschinen und Vorschauen in sozialen Netzwerken. */
+export type Meta = { title: string; description: string };
+
+/** Globale Einstellungen: UI-Texte, Social Links, Meta-Angaben und die Vorstellung im Hero. */
 export type Settings = Editable & {
+	meta: Meta;
 	role: string;
 	greeting: string;
 	intro: string;

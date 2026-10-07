@@ -1,5 +1,10 @@
 // Zugriff auf die Storyblok Management API für die Skripte in diesem Ordner.
 // Erwartet STORYBLOK_SPACE_ID und STORYBLOK_PERSONAL_ACCESS_TOKEN, optional STORYBLOK_REGION (eu, us, ca, ap).
+// Die Werte kommen aus der Umgebung oder aus `.env.local`; gesetzte Umgebungsvariablen haben Vorrang.
+import { existsSync } from "node:fs";
+
+const envFile = new URL("../.env.local", import.meta.url);
+if (existsSync(envFile)) process.loadEnvFile(envFile);
 
 const hosts = {
 	eu: "mapi.storyblok.com",

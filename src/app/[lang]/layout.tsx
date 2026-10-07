@@ -6,7 +6,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StoryblokPreview } from "@/components/storyblok-preview";
 import { getSettings } from "@/content";
-import { hasLocale, locales } from "@/i18n";
+import { hasLocale, locales, type Locale } from "@/i18n";
+import { siteUrl } from "@/site";
 import "../globals.css";
 
 const spaceGrotesk = localFont({
@@ -15,10 +16,26 @@ const spaceGrotesk = localFont({
 	variable: "--font-space-grotesk",
 });
 
-export const metadata: Metadata = {
-	title: "Benni Holderle",
-	description: "Software-Entwickler – Projekte von Benni Holderle",
-};
+const openGraphLocales: Record<Locale, string> = { de: "de_DE", en: "en_US" };
+
+export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Promise<Metadata> {
+	const { lang } = await params;
+	if (!hasLocale(lang)) notFound();
+	const { meta } = await getSettings(lang);
+	return {
+		metadataBase: siteUrl,
+		title: { default: meta.title, template: `%s · ${meta.title}` },
+		description: meta.description,
+		openGraph: {
+			type: "website",
+			siteName: meta.title,
+			title: meta.title,
+			description: meta.description,
+			locale: openGraphLocales[lang],
+		},
+		twitter: { card: "summary_large_image" },
+	};
+}
 
 export function generateStaticParams() {
 	return locales.map((lang) => ({ lang }));

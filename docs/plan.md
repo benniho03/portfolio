@@ -70,10 +70,10 @@ Fertig, wenn eine Änderung in Storyblok nach dem Veröffentlichen auf der Previ
 
 ## Phase 5: SEO
 
-- [ ] Titel und Beschreibung pro Sprache.
-- [ ] hreflang-Verweise zwischen `/de` und `/en`.
-- [ ] `sitemap.xml` und `robots.txt`.
-- [ ] Generiertes Vorschaubild für Social Media.
+- [x] Titel und Beschreibung pro Sprache (Felder „Seitentitel“ und „Seitenbeschreibung“ in den Einstellungen).
+- [x] hreflang-Verweise zwischen `/de` und `/en`.
+- [x] `sitemap.xml` und `robots.txt`.
+- [x] Generiertes Vorschaubild für Social Media.
 
 Fertig, wenn Sitemap und Vorschaubild auf der Preview erreichbar sind.
 

@@ -59,15 +59,21 @@ describe("proxy", () => {
 		expect(redirectTarget("/english", "en")).toBe("https://holderle.de/en/english");
 	});
 
-	test("läuft nicht für Next.js-Interna, API-Routen und das Favicon", () => {
-		for (const url of ["/_next/static/chunk.js", "/api/revalidate", "/favicon.ico"]) {
+	test("läuft nicht für Next.js-Interna, API-Routen, Favicon, Sitemap und robots.txt", () => {
+		for (const url of [
+			"/_next/static/chunk.js",
+			"/api/revalidate",
+			"/favicon.ico",
+			"/sitemap.xml",
+			"/robots.txt",
+		]) {
 			expect(doesProxyMatch({ config, url })).toBe(false);
 		}
 		expect(doesProxyMatch({ config, url: "/" })).toBe(true);
 	});
 
 	test("nimmt nur ganze Pfadsegmente von der Umleitung aus", () => {
-		for (const url of ["/apiary", "/favicon.icon", "/_nextjs"]) {
+		for (const url of ["/apiary", "/favicon.icon", "/_nextjs", "/sitemap.xml.bak"]) {
 			expect(doesProxyMatch({ config, url })).toBe(true);
 		}
 	});

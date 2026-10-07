@@ -96,6 +96,8 @@ export function toAbout({ content }: Story<AboutContent>): About {
 
 export type SettingsContent = Blok & {
 	component: "settings";
+	meta_title: string;
+	meta_description: string;
 	role: string;
 	greeting: string;
 	intro: string;
@@ -106,6 +108,7 @@ export type SettingsContent = Blok & {
 export function toSettings({ content }: Story<SettingsContent>): Settings {
 	const photo = optional(content.photo?.filename);
 	return {
+		meta: { title: content.meta_title, description: content.meta_description },
 		role: content.role,
 		greeting: content.greeting,
 		intro: content.intro,

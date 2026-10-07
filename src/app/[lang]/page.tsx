@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AboutSection } from "@/components/about-section";
 import { CareerSection } from "@/components/career-section";
@@ -5,6 +6,13 @@ import { Hero } from "@/components/hero";
 import { ProjectsSection } from "@/components/projects-section";
 import { getStartseite, getSettings } from "@/content";
 import { hasLocale } from "@/i18n";
+import { alternates } from "@/site";
+
+export async function generateMetadata({ params }: PageProps<"/[lang]">): Promise<Metadata> {
+	const { lang } = await params;
+	if (!hasLocale(lang)) notFound();
+	return { alternates: alternates(lang, "") };
+}
 
 export default async function Startseite({ params }: PageProps<"/[lang]">) {
 	const { lang } = await params;

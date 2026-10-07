@@ -135,13 +135,15 @@ describe("editable", () => {
 });
 
 describe("toSettings", () => {
-	it("bildet Vorstellung, Foto, Social Links und Labels ab", () => {
+	it("bildet Meta-Angaben, Vorstellung, Foto, Social Links und Labels ab", () => {
 		expect(
 			toSettings({
 				uuid: "u-settings",
 				slug: "einstellungen",
 				content: {
 					component: "settings",
+					meta_title: "Benni Holderle",
+					meta_description: "Software-Entwickler aus Stuttgart",
 					role: "Software-Entwickler",
 					greeting: "Hi! Ich bin Benni.",
 					intro: "Ich baue gerne Dinge fürs Web.",
@@ -170,6 +172,7 @@ describe("toSettings", () => {
 				},
 			}),
 		).toStrictEqual({
+			meta: { title: "Benni Holderle", description: "Software-Entwickler aus Stuttgart" },
 			role: "Software-Entwickler",
 			greeting: "Hi! Ich bin Benni.",
 			intro: "Ich baue gerne Dinge fürs Web.",
