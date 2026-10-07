@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Settings, Skill } from "@/content/types";
 import { orbitRings } from "./orbit-rings";
 import { sectionLabel } from "./section";
@@ -37,14 +38,28 @@ export function Hero({ settings, skills }: { settings: Settings; skills: Skill[]
 				</div>
 			</div>
 			<SkillOrbit rings={orbitRings(skills)} className="aspect-[6/5]">
-				<Portrait />
+				<Portrait photo={settings.photo} />
 			</SkillOrbit>
 		</section>
 	);
 }
 
-/** Platzhalter, bis das Foto aus dem CMS kommt. */
-function Portrait() {
+/** Ohne Foto im CMS zeigt der Kreis einen Platzhalter. */
+function Portrait({ photo }: { photo?: string }) {
+	if (photo) {
+		return (
+			<div className="relative aspect-square w-[28%] overflow-hidden rounded-full shadow-xl ring-8 ring-white">
+				<Image
+					src={photo}
+					alt=""
+					fill
+					sizes="(min-width: 768px) 18vw, 28vw"
+					className="object-cover"
+					fetchPriority="high"
+				/>
+			</div>
+		);
+	}
 	return (
 		<div className="relative grid aspect-square w-[28%] place-items-center rounded-full bg-gradient-to-br from-pink-600 to-amber-400 text-4xl font-bold text-white shadow-xl ring-8 ring-white md:text-6xl">
 			b.

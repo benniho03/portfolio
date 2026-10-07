@@ -58,8 +58,9 @@ Fertig, wenn jeder Push eine Preview-URL erzeugt.
 
 - [x] Konto und Space anlegen, Sprachen DE (Standard) und EN.
 - [x] Schema anlegen: Einstellungen, Über mich, Technologie, Projekt, Station, Rechtliche Seite (`npm run storyblok:schema`).
-- [ ] Datenschicht: Storyblok-Daten auf die Domänentypen abbilden, mit Unit-Tests.
-- [ ] Bilder (Foto, Screenshots, Logos) aus dem Storyblok-Asset-Manager über `next/image` ausliefern.
+- [x] Datenschicht: Storyblok-Daten auf die Domänentypen abbilden, mit Unit-Tests.
+- [x] Platzhalterinhalte nach Storyblok übertragen (`npm run storyblok:import`).
+- [x] Bilder (Foto, Screenshots, Logos) aus dem Storyblok-Asset-Manager über `next/image` ausliefern.
 - [ ] Webhook beim Veröffentlichen löst die Revalidierung aus.
 - [ ] Draft Mode und Visual Editor mit Live-Preview.
 - [ ] `src/content/placeholder.ts` und `public/placeholder/` entfernen.

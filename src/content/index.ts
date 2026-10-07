@@ -1,39 +1,72 @@
+import { apiPlugin, storyblokInit, type ISbStoriesParams } from "@storyblok/react/rsc";
 import type { Locale } from "@/i18n";
-import * as placeholder from "./placeholder";
+import {
+	toProject,
+	toRechtlicheSeite,
+	toSettings,
+	toStation,
+	toTechnology,
+	type ProjectContent,
+	type RechtlicheSeiteContent,
+	type SettingsContent,
+	type StationContent,
+	type Story,
+	type TechnologyContent,
+} from "./storyblok";
 import type {
 	About,
+	Project,
 	RechtlicheSeite,
 	RechtlicheSeiteArt,
-	Project,
 	Settings,
 	Skill,
 	Station,
-	Technology,
 } from "./types";
 
-function technologyByKey(key: string): Technology {
-	const match = placeholder.technologies.find((technology) => technology.key === key);
-	if (!match) throw new Error(`Unbekannte Technologie: ${key}`);
-	return match;
+/** Cache-Tag aller Storyblok-Abfragen; der Webhook invalidiert ihn beim Veröffentlichen. */
+export const STORYBLOK_TAG = "storyblok";
+
+const getStoryblokApi = storyblokInit({
+	accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
+	use: [apiPlugin],
+	apiOptions: { region: process.env.STORYBLOK_REGION ?? "eu", cache: { type: "none" } },
+});
+
+const fetchOptions: RequestInit = { cache: "force-cache", next: { tags: [STORYBLOK_TAG] } };
+
+const resolveRelations = ["project.technologies", "station.technologies"];
+
+async function getStory<Content>(slug: string, lang: Locale): Promise<Story<Content>> {
+	const { data } = await getStoryblokApi().getStory(
+		slug,
+		{ version: "published", language: lang },
+		fetchOptions,
+	);
+	return data.story as unknown as Story<Content>;
+}
+
+async function getStories<Content>(
+	folder: string,
+	lang: Locale,
+	params: ISbStoriesParams = {},
+): Promise<Story<Content>[]> {
+	const stories = await getStoryblokApi().getAll(
+		"cdn/stories",
+		{
+			version: "published",
+			language: lang,
+			starts_with: `${folder}/`,
+			sort_by: "position:asc",
+			...params,
+		},
+		"stories",
+		fetchOptions,
+	);
+	return stories as Story<Content>[];
 }
 
 export async function getSettings(lang: Locale): Promise<Settings> {
-	const { about, labels, socialLinks } = placeholder;
-	return {
-		role: about.role[lang],
-		greeting: about.greeting[lang],
-		intro: about.intro[lang],
-		socialLinks,
-		labels: {
-			about: labels.about[lang],
-			career: labels.career[lang],
-			projects: labels.projects[lang],
-			visit: labels.visit[lang],
-			today: labels.today[lang],
-			imprint: labels.imprint[lang],
-			privacy: labels.privacy[lang],
-		},
-	};
+	return toSettings(await getStory<SettingsContent>("einstellungen", lang));
 }
 
 export async function getStartseite(lang: Locale): Promise<{
@@ -42,20 +75,17 @@ export async function getStartseite(lang: Locale): Promise<{
 	stations: Station[];
 	projects: Project[];
 }> {
+	const [about, technologies, stations, projects] = await Promise.all([
+		getStory<{ bio: string }>("ueber-mich", lang),
+		getStories<TechnologyContent>("technologien", lang),
+		getStories<StationContent>("stationen", lang, { resolve_relations: resolveRelations }),
+		getStories<ProjectContent>("projekte", lang, { resolve_relations: resolveRelations }),
+	]);
 	return {
-		about: { bio: placeholder.about.bio[lang] },
-		skills: placeholder.technologies.filter((item): item is Skill => item.isSkill),
-		stations: placeholder.stations.map((station) => ({
-			...station,
-			role: station.role[lang],
-			description: station.description[lang],
-			technologies: station.technologies.map(technologyByKey),
-		})),
-		projects: placeholder.projects.map((project) => ({
-			...project,
-			description: project.description[lang],
-			technologies: project.technologies.map(technologyByKey),
-		})),
+		about: { bio: about.content.bio },
+		skills: technologies.map(toTechnology).filter((item): item is Skill => item.isSkill),
+		stations: stations.map(toStation),
+		projects: projects.map(toProject),
 	};
 }
 
@@ -63,6 +93,5 @@ export async function getRechtlicheSeite(
 	lang: Locale,
 	kind: RechtlicheSeiteArt,
 ): Promise<RechtlicheSeite> {
-	const { title, paragraphs } = placeholder.rechtlicheSeiten[kind];
-	return { title: title[lang], paragraphs: paragraphs.map((paragraph) => paragraph[lang]) };
+	return toRechtlicheSeite(await getStory<RechtlicheSeiteContent>(`rechtliches/${kind}`, lang));
 }

@@ -1,33 +1,6 @@
 // Legt die Blocks im Storyblok-Space an oder aktualisiert sie.
-// Aufruf: STORYBLOK_SPACE_ID=… STORYBLOK_PERSONAL_ACCESS_TOKEN=… node scripts/storyblok-schema.mjs
-// Optional STORYBLOK_REGION (eu, us, ca, ap), Standard ist eu.
-
-const hosts = {
-	eu: "mapi.storyblok.com",
-	us: "api-us.storyblok.com",
-	ca: "api-ca.storyblok.com",
-	ap: "api-ap.storyblok.com",
-};
-
-const region = process.env.STORYBLOK_REGION ?? "eu";
-const spaceId = process.env.STORYBLOK_SPACE_ID?.trim();
-const token = process.env.STORYBLOK_PERSONAL_ACCESS_TOKEN?.trim();
-if (!spaceId || !token) {
-	console.error("STORYBLOK_SPACE_ID und STORYBLOK_PERSONAL_ACCESS_TOKEN müssen gesetzt sein.");
-	process.exit(1);
-}
-if (!/^\d+$/.test(spaceId)) {
-	console.error(`STORYBLOK_SPACE_ID muss eine Zahl sein, ist aber „${spaceId}“.`);
-	process.exit(1);
-}
-if (!hosts[region]) {
-	console.error(
-		`Unbekannte STORYBLOK_REGION „${region}“. Erlaubt: ${Object.keys(hosts).join(", ")}.`,
-	);
-	process.exit(1);
-}
-
-const API = `https://${hosts[region]}/v1`;
+// Aufruf: npm run storyblok:schema (Zugangsdaten siehe storyblok-mapi.mjs)
+import { request } from "./storyblok-mapi.mjs";
 
 const text = (display_name, extra = {}) => ({ type: "text", display_name, ...extra });
 const textarea = (display_name, extra = {}) => ({ type: "textarea", display_name, ...extra });
@@ -170,23 +143,9 @@ const components = [
 	},
 ];
 
-async function request(method, path, body) {
-	const response = await fetch(`${API}/spaces/${spaceId}${path}`, {
-		method,
-		headers: { Authorization: token, "Content-Type": "application/json" },
-		body: body && JSON.stringify(body),
-	});
-	if (!response.ok) {
-		throw new Error(`${method} ${path}: ${response.status} ${await response.text()}`);
-	}
-	return response.status === 204 ? null : response.json();
-}
-
 const list = await request("GET", "/components/");
-if (!Array.isArray(list?.components)) {
-	throw new Error(
-		`Unerwartete Antwort von ${API}/spaces/${spaceId}/components/: ${JSON.stringify(list)}`,
-	);
+if (!Array.isArray(list.components)) {
+	throw new Error(`Komponentenliste fehlt in der Antwort: ${JSON.stringify(list)}`);
 }
 const existing = list.components;
 

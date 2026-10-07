@@ -43,6 +43,8 @@ export type Settings = {
 	role: string;
 	greeting: string;
 	intro: string;
+	/** Ohne Foto zeigt der Hero einen Platzhalter. */
+	photo?: string;
 	socialLinks: SocialLink[];
 	labels: Labels;
 };
