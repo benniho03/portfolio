@@ -56,8 +56,8 @@ Fertig, wenn jeder Push eine Preview-URL erzeugt.
 
 ## Phase 4: Storyblok
 
-- [ ] Konto und Space anlegen, Sprachen DE (Standard) und EN.
-- [ ] Schema anlegen: Einstellungen, Über mich, Technologie, Projekt, Station, Rechtliche Seite.
+- [x] Konto und Space anlegen, Sprachen DE (Standard) und EN.
+- [x] Schema anlegen: Einstellungen, Über mich, Technologie, Projekt, Station, Rechtliche Seite (`npm run storyblok:schema`).
 - [ ] Datenschicht: Storyblok-Daten auf die Domänentypen abbilden, mit Unit-Tests.
 - [ ] Bilder (Foto, Screenshots, Logos) aus dem Storyblok-Asset-Manager über `next/image` ausliefern.
 - [ ] Webhook beim Veröffentlichen löst die Revalidierung aus.

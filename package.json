@@ -14,7 +14,8 @@
 		"typecheck": "next typegen && tsc --noEmit",
 		"test": "vitest run",
 		"test:watch": "vitest",
-		"prepare": "husky"
+		"prepare": "husky",
+		"storyblok:schema": "node scripts/storyblok-schema.mjs"
 	},
 	"dependencies": {
 		"next": "16.3.8",
