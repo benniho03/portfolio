@@ -1,6 +1,9 @@
 // Bildet die Antworten der Storyblok Content Delivery API auf die Domänentypen ab.
 // Jede Story liegt bereits in der angefragten Sprache vor.
+import { storyblokEditable } from "@storyblok/react/rsc";
 import type {
+	About,
+	EditorAttributes,
 	Labels,
 	Project,
 	RechtlicheSeite,
@@ -14,7 +17,17 @@ export type Story<Content> = { uuid: string; slug: string; content: Content };
 
 type Asset = { filename?: string | null } | null | undefined;
 
-export type TechnologyContent = {
+/** Markierung für den Visual Editor; Storyblok liefert sie nur bei Entwürfen. */
+type Blok = { _editable?: string };
+
+function editable(content: Blok): { editable?: EditorAttributes } {
+	const attributes = storyblokEditable(content);
+	const marker = attributes["data-blok-c"];
+	const uid = attributes["data-blok-uid"];
+	return marker && uid ? { editable: { "data-blok-c": marker, "data-blok-uid": uid } } : {};
+}
+
+export type TechnologyContent = Blok & {
 	component: "technology";
 	name: string;
 	logo?: Asset;
@@ -51,7 +64,7 @@ function toTechnologies(refs: TechnologyRefs): Technology[] {
 		.map(toTechnology);
 }
 
-export type ProjectContent = {
+export type ProjectContent = Blok & {
 	component: "project";
 	name: string;
 	description: string;
@@ -71,10 +84,17 @@ export function toProject({ content }: Story<ProjectContent>): Project {
 		technologies: toTechnologies(content.technologies),
 		...(link && { link }),
 		...(githubLink && { githubLink }),
+		...editable(content),
 	};
 }
 
-export type SettingsContent = {
+export type AboutContent = Blok & { component: "about"; bio: string };
+
+export function toAbout({ content }: Story<AboutContent>): About {
+	return { bio: content.bio, ...editable(content) };
+}
+
+export type SettingsContent = Blok & {
 	component: "settings";
 	role: string;
 	greeting: string;
@@ -100,10 +120,11 @@ export function toSettings({ content }: Story<SettingsContent>): Settings {
 			imprint: content.label_imprint,
 			privacy: content.label_privacy,
 		},
+		...editable(content),
 	};
 }
 
-export type RechtlicheSeiteContent = {
+export type RechtlicheSeiteContent = Blok & {
 	component: "rechtliche_seite";
 	title: string;
 	body: string;
@@ -117,10 +138,11 @@ export function toRechtlicheSeite({ content }: Story<RechtlicheSeiteContent>): R
 			.split(/\n\s*\n/)
 			.map((paragraph) => paragraph.trim())
 			.filter(Boolean),
+		...editable(content),
 	};
 }
 
-export type StationContent = {
+export type StationContent = Blok & {
 	component: "station";
 	kind: Station["kind"];
 	role: string;
@@ -141,5 +163,6 @@ export function toStation({ content }: Story<StationContent>): Station {
 		...(to && { to }),
 		description: content.description,
 		technologies: toTechnologies(content.technologies),
+		...editable(content),
 	};
 }

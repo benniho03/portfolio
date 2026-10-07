@@ -1,11 +1,14 @@
 import { apiPlugin, storyblokInit, type ISbStoriesParams } from "@storyblok/react/rsc";
+import { draftMode } from "next/headers";
 import type { Locale } from "@/i18n";
 import {
+	toAbout,
 	toProject,
 	toRechtlicheSeite,
 	toSettings,
 	toStation,
 	toTechnology,
+	type AboutContent,
 	type ProjectContent,
 	type RechtlicheSeiteContent,
 	type SettingsContent,
@@ -32,14 +35,23 @@ const getStoryblokApi = storyblokInit({
 	apiOptions: { region: process.env.STORYBLOK_REGION ?? "eu", cache: { type: "none" } },
 });
 
-const fetchOptions: RequestInit = { cache: "force-cache", next: { tags: [STORYBLOK_TAG] } };
+const publishedFetch: RequestInit = { cache: "force-cache", next: { tags: [STORYBLOK_TAG] } };
+
+/** Im Draft Mode (Visual Editor) kommen Entwürfe ungecacht, sonst veröffentlichte Inhalte. */
+async function source() {
+	const { isEnabled } = await draftMode();
+	return isEnabled
+		? { version: "draft" as const, fetchOptions: { cache: "no-store" } satisfies RequestInit }
+		: { version: "published" as const, fetchOptions: publishedFetch };
+}
 
 const resolveRelations = ["project.technologies", "station.technologies"];
 
 async function getStory<Content>(slug: string, lang: Locale): Promise<Story<Content>> {
+	const { version, fetchOptions } = await source();
 	const { data } = await getStoryblokApi().getStory(
 		slug,
-		{ version: "published", language: lang },
+		{ version, language: lang },
 		fetchOptions,
 	);
 	return data.story as unknown as Story<Content>;
@@ -50,10 +62,11 @@ async function getStories<Content>(
 	lang: Locale,
 	params: ISbStoriesParams = {},
 ): Promise<Story<Content>[]> {
+	const { version, fetchOptions } = await source();
 	const stories = await getStoryblokApi().getAll(
 		"cdn/stories",
 		{
-			version: "published",
+			version,
 			language: lang,
 			starts_with: `${folder}/`,
 			sort_by: "position:asc",
@@ -76,13 +89,13 @@ export async function getStartseite(lang: Locale): Promise<{
 	projects: Project[];
 }> {
 	const [about, technologies, stations, projects] = await Promise.all([
-		getStory<{ bio: string }>("ueber-mich", lang),
+		getStory<AboutContent>("ueber-mich", lang),
 		getStories<TechnologyContent>("technologien", lang),
 		getStories<StationContent>("stationen", lang, { resolve_relations: resolveRelations }),
 		getStories<ProjectContent>("projekte", lang, { resolve_relations: resolveRelations }),
 	]);
 	return {
-		about: { bio: about.content.bio },
+		about: toAbout(about),
 		skills: technologies.map(toTechnology).filter((item): item is Skill => item.isSkill),
 		stations: stations.map(toStation),
 		projects: projects.map(toProject),

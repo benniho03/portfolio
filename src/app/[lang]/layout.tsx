@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { StoryblokPreview } from "@/components/storyblok-preview";
 import { getSettings } from "@/content";
 import { hasLocale, locales } from "@/i18n";
 import "../globals.css";
@@ -25,7 +27,10 @@ export function generateStaticParams() {
 export default async function RootLayout({ children, params }: LayoutProps<"/[lang]">) {
 	const { lang } = await params;
 	if (!hasLocale(lang)) notFound();
-	const { labels } = await getSettings(lang);
+	const [{ labels }, { isEnabled: isDraft }] = await Promise.all([
+		getSettings(lang),
+		draftMode(),
+	]);
 
 	return (
 		<html
@@ -37,6 +42,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
 				<SiteHeader lang={lang} labels={labels} />
 				<main className="mx-auto max-w-6xl px-4">{children}</main>
 				<SiteFooter lang={lang} labels={labels} />
+				{isDraft && <StoryblokPreview />}
 			</body>
 		</html>
 	);

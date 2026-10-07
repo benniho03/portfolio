@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+	toAbout,
 	toProject,
 	toRechtlicheSeite,
 	toSettings,
@@ -102,6 +103,34 @@ describe("toProject", () => {
 			],
 			githubLink: "https://github.com/benniho03/studycard",
 		});
+	});
+});
+
+describe("editable", () => {
+	const marker = '{"name":"project","space":"1","uid":"b-1","id":"7"}';
+
+	it("reicht die Attribute für den Visual Editor durch, wenn Storyblok sie mitliefert", () => {
+		const project = toProject({
+			uuid: "u-p",
+			slug: "p",
+			content: {
+				component: "project",
+				name: "P",
+				description: "",
+				image: null,
+				_editable: `<!--#storyblok#${marker}-->`,
+			},
+		});
+		expect(project.editable).toStrictEqual({ "data-blok-c": marker, "data-blok-uid": "7-b-1" });
+	});
+
+	it("lässt die Attribute bei unlesbarer Markierung weg", () => {
+		const about = toAbout({
+			uuid: "u-a",
+			slug: "ueber-mich",
+			content: { component: "about", bio: "Hallo", _editable: "<!--#storyblok#kaputt-->" },
+		});
+		expect(about).toStrictEqual({ bio: "Hallo" });
 	});
 });
 

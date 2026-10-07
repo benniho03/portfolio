@@ -61,7 +61,7 @@ Fertig, wenn jeder Push eine Preview-URL erzeugt.
 - [x] Datenschicht: Storyblok-Daten auf die Domänentypen abbilden, mit Unit-Tests.
 - [x] Platzhalterinhalte nach Storyblok übertragen (`npm run storyblok:import`).
 - [x] Bilder (Foto, Screenshots, Logos) aus dem Storyblok-Asset-Manager über `next/image` ausliefern.
-- [ ] Webhook beim Veröffentlichen löst die Revalidierung aus.
+- [x] Webhook beim Veröffentlichen löst die Revalidierung aus.
 - [ ] Draft Mode und Visual Editor mit Live-Preview.
 - [ ] `src/content/placeholder.ts` und `public/placeholder/` entfernen.
 - [ ] Matcher in `src/proxy.ts` anpassen: `placeholder` streichen, Ausnahmen nur als ganze Pfadsegmente.

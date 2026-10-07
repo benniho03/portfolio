@@ -43,6 +43,7 @@ function ProjectTile({
 }) {
 	return (
 		<article
+			{...project.editable}
 			className={`group relative min-h-64 overflow-hidden rounded-3xl bg-stone-900 ${tile.span}`}
 		>
 			<Image

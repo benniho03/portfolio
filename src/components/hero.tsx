@@ -6,7 +6,10 @@ import { SkillOrbit } from "./skill-orbit";
 
 export function Hero({ settings, skills }: { settings: Settings; skills: Skill[] }) {
 	return (
-		<section className="grid items-center gap-8 md:min-h-[75vh] md:grid-cols-[1fr_1.15fr]">
+		<section
+			{...settings.editable}
+			className="grid items-center gap-8 md:min-h-[75vh] md:grid-cols-[1fr_1.15fr]"
+		>
 			<div>
 				<p className={sectionLabel}>{settings.role}</p>
 				<h1 className="mt-3 text-5xl font-bold leading-none md:text-7xl">

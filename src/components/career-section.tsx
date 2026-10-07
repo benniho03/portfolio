@@ -15,7 +15,11 @@ export function CareerSection({
 			<h2 className={sectionLabel}>{heading}</h2>
 			<ol className="relative space-y-8 border-l-2 border-stone-300 pl-6">
 				{stations.map((station) => (
-					<li key={`${station.organisation}-${station.from}`} className="relative">
+					<li
+						{...station.editable}
+						key={`${station.organisation}-${station.from}`}
+						className="relative"
+					>
 						<span className="absolute -left-[33px] top-1.5 size-4 rounded-full border-4 border-stone-100 bg-stone-900" />
 						<p className="text-sm tabular-nums text-stone-500">
 							{station.from} – {station.to ?? today}
