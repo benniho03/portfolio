@@ -10,10 +10,10 @@ Begriffe stehen in [`GLOSSARY.md`](../GLOSSARY.md), das Design in [`design.md`](
 - **Repo:** GitHub `benniho03/portfolio`. Der Prototyp kommt in den ersten Commit und wird in einem eigenen Commit entfernt, damit er in der History nachvollziehbar bleibt.
 - **CMS:** Storyblok im kostenlosen Starter-Tarif (2 Sprachen, 100.000 API-Anfragen im Monat). Deutsch und Englisch werden auf Feldebene übersetzt.
 - **Was ins CMS kommt:** alle Inhalte, auch die UI-Texte („Ansehen“, „heute“, Navigationslabels).
-  - Ein globaler Eintrag **Einstellungen** enthält UI-Texte, Social Links, Foto, Rolle und Intro.
-  - **Technologie** ist ein eigener Eintragstyp (Name, Logo, ist Skill, Gewichtung). Projekte und Stationen verweisen darauf.
-  - Die Reihenfolge der Projekte wird im CMS manuell festgelegt. Das erste Projekt erscheint als große Kachel.
-  - Impressum und Datenschutz sind **Rechtliche Seiten** mit eigenen Routen (`/de/impressum`, `/de/datenschutz` und die englischen Gegenstücke).
+    - Ein globaler Eintrag **Einstellungen** enthält UI-Texte, Social Links, Foto, Rolle und Intro.
+    - **Technologie** ist ein eigener Eintragstyp (Name, Logo, ist Skill, Gewichtung). Projekte und Stationen verweisen darauf.
+    - Die Reihenfolge der Projekte wird im CMS manuell festgelegt. Das erste Projekt erscheint als große Kachel.
+    - Impressum und Datenschutz sind **Rechtliche Seiten** mit eigenen Routen (`/de/impressum`, `/de/datenschutz` und die englischen Gegenstücke).
 - **Aktualisierung:** Die Seite wird statisch ausgeliefert. Beim Veröffentlichen löst ein Storyblok-Webhook die Revalidierung aus.
 - **Live-Vorschau:** Draft Mode von Next.js auf der Produktiv-Website, abgesichert über ein geheimes Token.
 - **Statistik:** keine.

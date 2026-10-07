@@ -16,13 +16,13 @@ Umgesetzt ist das Design in `src/components/`. Der Prototyp aller drei Runden li
 
 1. **Header:** links das Wortzeichen `benni.` (fett, kleingeschrieben mit Punkt). Rechts die Ankerlinks „Über mich“ und „Projekte“ sowie der Sprachumschalter DE/EN.
 2. **Hero (Split):** zweispaltig (`md:grid-cols-[1fr_1.15fr]`), vertikal zentriert, mindestens 75 % der Bildschirmhöhe. Auf Mobilgeräten untereinander, Text zuerst.
-   - Links: Rolle (klein, Großbuchstaben, weit gesperrt), Begrüßung als `h1` („Hi! Ich bin Benni.“), Intro-Text. Darunter die Social Links (GitHub, LinkedIn, E-Mail als `mailto`) als dunkle Pillen mit `↗` und ein umrandeter Button „Projekte ↓“.
-   - Rechts: der **Skill-Orbit** (siehe unten) mit Bennis Foto in der Mitte.
+    - Links: Rolle (klein, Großbuchstaben, weit gesperrt), Begrüßung als `h1` („Hi! Ich bin Benni.“), Intro-Text. Darunter die Social Links (GitHub, LinkedIn, E-Mail als `mailto`) als dunkle Pillen mit `↗` und ein umrandeter Button „Projekte ↓“.
+    - Rechts: der **Skill-Orbit** (siehe unten) mit Bennis Foto in der Mitte.
 3. **Über mich:** oben eine Trennlinie. Zweispaltig: kleine Überschrift links (`1fr`), großer Fließtext rechts (`3fr`, `text-2xl`/`3xl`).
 4. **Werdegang:** gleiches Raster. Vertikale Timeline mit Linie und Punkten. Jede Station zeigt Zeitraum, Rolle (fett), Organisation, Beschreibung und darunter ihre Technologien als Textzeile in Nebentextfarbe („TypeScript · React · Docker“). Ohne Enddatum steht „heute“.
 5. **Projekte:** Überschrift „Projekte“ mit der Anzahl in Grau. Darunter das Bento-Raster (`md:grid-cols-4`, Zeilen mindestens `10rem`, Lücke `gap-4`). Das erste Projekt ist groß (2×2), danach wechseln breite und kleine Kacheln.
-   - Kachel: Screenshot füllt die Fläche, darüber ein Verlauf von unten nach Schwarz. Unten stehen die Technologie-Chips, der Name, eine zweizeilige Beschreibung (beim Hover ganz) und die Buttons „Ansehen“ (weiß) und „GitHub“ (umrandet). Jeder Button erscheint nur, wenn der zugehörige Link existiert.
-   - Hover: Das Bild zoomt leicht und wird dunkler.
+    - Kachel: Screenshot füllt die Fläche, darüber ein Verlauf von unten nach Schwarz. Unten stehen die Technologie-Chips, der Name, eine zweizeilige Beschreibung (beim Hover ganz) und die Buttons „Ansehen“ (weiß) und „GitHub“ (umrandet). Jeder Button erscheint nur, wenn der zugehörige Link existiert.
+    - Hover: Das Bild zoomt leicht und wird dunkler.
 6. **Footer:** Links zu den rechtlichen Seiten Impressum und Datenschutz. Sie haben eigene Routen (`/[lang]/impressum`, `/[lang]/datenschutz`) mit demselben Header und Footer und schlichtem Fließtext.
 
 ## Skill-Orbit
@@ -32,11 +32,11 @@ Das Kernelement des Designs. Die Logos der Skills kreisen auf **ovalen** Bahnen 
 - Container im Seitenverhältnis `6/5`. Gestrichelte Ellipsen (`stone-300`) zeigen die Bahnen.
 - Drei Ringe, einer pro Gewichtung. Halbachsen in Prozent der Containerbreite bzw. -höhe:
 
-  | Ring  | Gewichtung | rx / ry | Umlaufzeit        | Logogröße mobil / ab `md` |
-  | ----- | ---------- | ------- | ----------------- | ------------------------- |
-  | innen | 3          | 22 / 25 | 45 s              | `size-9` / `size-14`      |
-  | mitte | 2          | 34 / 37 | 72 s, gegenläufig | `size-7` / `size-10`      |
-  | außen | 1          | 46 / 47 | 99 s              | `size-5` / `size-8`       |
+    | Ring  | Gewichtung | rx / ry | Umlaufzeit        | Logogröße mobil / ab `md` |
+    | ----- | ---------- | ------- | ----------------- | ------------------------- |
+    | innen | 3          | 22 / 25 | 45 s              | `size-9` / `size-14`      |
+    | mitte | 2          | 34 / 37 | 72 s, gegenläufig | `size-7` / `size-10`      |
+    | außen | 1          | 46 / 47 | 99 s              | `size-5` / `size-8`       |
 
 - Logos sitzen in weißen, abgerundeten Badges mit Schatten und bleiben beim Kreisen aufrecht.
 - Hover oder Fokus auf ein Logo hält den Orbit an und zeigt den Namen als Tooltip.

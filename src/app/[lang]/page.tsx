@@ -7,20 +7,20 @@ import { getStartseite, getSettings } from "@/content";
 import { hasLocale } from "@/i18n";
 
 export default async function Startseite({ params }: PageProps<"/[lang]">) {
-  const { lang } = await params;
-  if (!hasLocale(lang)) notFound();
-  const [settings, { about, skills, stations, projects }] = await Promise.all([
-    getSettings(lang),
-    getStartseite(lang),
-  ]);
-  const { labels } = settings;
+	const { lang } = await params;
+	if (!hasLocale(lang)) notFound();
+	const [settings, { about, skills, stations, projects }] = await Promise.all([
+		getSettings(lang),
+		getStartseite(lang),
+	]);
+	const { labels } = settings;
 
-  return (
-    <>
-      <Hero settings={settings} skills={skills} />
-      <AboutSection about={about} heading={labels.about} />
-      <CareerSection stations={stations} heading={labels.career} today={labels.today} />
-      <ProjectsSection projects={projects} labels={labels} />
-    </>
-  );
+	return (
+		<>
+			<Hero settings={settings} skills={skills} />
+			<AboutSection about={about} heading={labels.about} />
+			<CareerSection stations={stations} heading={labels.career} today={labels.today} />
+			<ProjectsSection projects={projects} labels={labels} />
+		</>
+	);
 }

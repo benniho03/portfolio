@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-display: var(--font-space-grotesk);
+	--font-display: var(--font-space-grotesk);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
+	html {
+		scroll-behavior: smooth;
+	}
 }
