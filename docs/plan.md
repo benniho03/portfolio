@@ -92,8 +92,8 @@ Fertig, wenn holderle.de die neue Seite zeigt, die alten Pfade weiterleiten und 
 
 Muss vor Phase 6 fertig sein. Eingepflegt wird alles nach Phase 4 in Storyblok.
 
-- [ ] Texte auf Deutsch und Englisch: Rolle, Intro, Über mich, Stationen, Projektbeschreibungen.
+- [x] Texte auf Deutsch und Englisch: Rolle, Intro, Über mich, Stationen, Projektbeschreibungen.
 - [x] Porträtfoto.
 - [ ] Aktuelle Screenshots der Projekte.
-- [ ] Impressum und Datenschutz aus einem Generator (z. B. eRecht24), ohne Abschnitt zu Statistik-Tools.
+- [x] Impressum und Datenschutz (selbst entworfen statt Generator, ohne Abschnitt zu Statistik-Tools; Anschrift: Benjamin Holderle, Bieberer Str. 32, 63165 Mühlheim am Main).
 - [x] E-Mail-Adresse für die Kontakt-Pille festlegen (`benniho03@gmail.com`; LinkedIn wurde entfernt, weil es nicht gepflegt wird).
