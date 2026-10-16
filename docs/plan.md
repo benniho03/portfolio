@@ -79,9 +79,9 @@ Fertig, wenn Sitemap und Vorschaubild auf der Preview erreichbar sind.
 
 ## Phase 6: Go-live
 
-- [ ] Altprojekte auf Strato-Subdomains umziehen: `wetter-getter.holderle.de` und `pop-up.holderle.de` (beide Pop-Up-Projekte verlinken dorthin).
-- [ ] Redirects in Vercel: `/wetter-getter/` und `/pop-up/` auf die neuen Subdomains, `/study-card/` auf die Startseite.
-- [ ] Projektlinks in Storyblok auf die neuen Subdomains umstellen.
+- [x] Altprojekte auf Subdomains umziehen: `wetter-getter.holderle.de` und `pop-up.holderle.de` (beide Pop-Up-Projekte verlinken dorthin). Abweichend vom ursprünglichen Plan nicht auf dem Strato-Webspace (dort sind pro Subdomain nur Umleitung oder DNS-Records möglich, kein Verzeichnis-Ziel und kein SSL), sondern als statische 1:1-Kopien der Live-Dateien in eigenen Vercel-Projekten; die Subdomains zeigen per CNAME bei Strato auf Vercel, SSL stellt Vercel aus (Quellen: `~/code/wetter-getter/`, `~/code/pop-up-site/`).
+- [x] Redirects in Vercel: `/wetter-getter/` und `/pop-up/` auf die neuen Subdomains, `/study-card/` auf die Startseite (in `next.config.ts`, aktiv sobald die Domain auf Vercel zeigt).
+- [x] Projektlinks in Storyblok auf die neuen Subdomains umstellen.
 - [ ] Domain holderle.de und www in Vercel eintragen.
 - [ ] Bei Strato den A-Record von holderle.de und einen CNAME für www auf Vercel setzen. Nameserver und MX-Records bleiben unverändert.
 - [ ] Prüfen, ob E-Mails an holderle.de weiterhin ankommen.
@@ -93,7 +93,7 @@ Fertig, wenn holderle.de die neue Seite zeigt, die alten Pfade weiterleiten und 
 Muss vor Phase 6 fertig sein. Eingepflegt wird alles nach Phase 4 in Storyblok.
 
 - [ ] Texte auf Deutsch und Englisch: Rolle, Intro, Über mich, Stationen, Projektbeschreibungen.
-- [ ] Porträtfoto.
+- [x] Porträtfoto.
 - [ ] Aktuelle Screenshots der Projekte.
 - [ ] Impressum und Datenschutz aus einem Generator (z. B. eRecht24), ohne Abschnitt zu Statistik-Tools.
 - [ ] E-Mail-Adresse für die Kontakt-Pille festlegen.
