@@ -96,4 +96,4 @@ Muss vor Phase 6 fertig sein. Eingepflegt wird alles nach Phase 4 in Storyblok.
 - [x] Porträtfoto.
 - [ ] Aktuelle Screenshots der Projekte.
 - [ ] Impressum und Datenschutz aus einem Generator (z. B. eRecht24), ohne Abschnitt zu Statistik-Tools.
-- [ ] E-Mail-Adresse für die Kontakt-Pille festlegen.
+- [x] E-Mail-Adresse für die Kontakt-Pille festlegen (`benniho03@gmail.com`; LinkedIn wurde entfernt, weil es nicht gepflegt wird).
