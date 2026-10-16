@@ -1,6 +1,6 @@
 # Hosting auf Vercel, DNS und Mail bleiben bei Strato
 
-Die Website (Next.js mit Headless CMS) läuft auf Vercel, weil der Strato-Webspace kein Node.js ausführt und ein statischer Export bei jeder Inhaltsänderung einen manuellen Build und Upload erfordern würde. Die Domain holderle.de bleibt bei Strato: Nameserver und MX-Records (smtpin.rzone.de) werden nicht umgezogen, damit die E-Mail-Adressen unverändert funktionieren. Stattdessen zeigen der A-Record von holderle.de und ein CNAME für www auf Vercel – kein HTTP-Redirect, damit die Adresse im Browser holderle.de bleibt.
+Die Website (Next.js mit Headless CMS) läuft auf Vercel, weil der Strato-Webspace kein Node.js ausführt und ein statischer Export bei jeder Inhaltsänderung einen manuellen Build und Upload erfordern würde. Die Domain holderle.de bleibt bei Strato: Nameserver und MX-Records (smtpin.rzone.de) werden nicht umgezogen, damit die E-Mail-Adressen unverändert funktionieren. Stattdessen zeigt der A-Record von holderle.de auf Vercel (`76.76.21.21`, eine Adresse, weil Strato nur einen A-Record zulässt). www bleibt ein CNAME auf holderle.de und leitet auf dieselbe Seite um, damit die Adresse im Browser holderle.de bleibt.
 
 ## Consequences
 
